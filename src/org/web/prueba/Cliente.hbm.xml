@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05/09/2014 17:49:27 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.web.prueba.Cliente" table="Cliente" catalog="BasePPP">
+        <id name="idcli" type="int">
+            <column name="IDCli" />
+            <generator class="foreign">
+                <param name="property">clienteOrganizacion</param>
+            </generator>
+        </id>
+        <one-to-one name="clienteOrganizacion" class="org.web.prueba.ClienteOrganizacion" constrained="true"></one-to-one>
+        <property name="nom" type="string">
+            <column name="Nom" length="50">
+                <comment>Es el nombre del cliente</comment>
+            </column>
+        </property>
+        <property name="ape" type="string">
+            <column name="Ape" length="50">
+                <comment>Es el apellido del cliente.</comment>
+            </column>
+        </property>
+        <property name="dni" type="java.lang.Integer">
+            <column name="Dni">
+                <comment>Es el DNI del cliente.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

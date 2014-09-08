@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05/09/2014 17:49:27 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.web.prueba.Organizacion" table="Organizacion" catalog="BasePPP">
+        <id name="idorg" type="int">
+            <column name="IDOrg" />
+            <generator class="foreign">
+                <param name="property">clienteOrganizacion</param>
+            </generator>
+        </id>
+        <one-to-one name="clienteOrganizacion" class="org.web.prueba.ClienteOrganizacion" constrained="true"></one-to-one>
+        <property name="raso" type="string">
+            <column name="Raso" length="50">
+                <comment>Es la raz&#195;&#179;n social de la organizaci&#195;&#179;n.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="PruebaWeb">
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">opel33opel</property>
+        <property name="hibernate.connection.url">jdbc:mysql://debianlamp/BasePPP</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <mapping resource="org/web/prueba/Pedido.hbm.xml" />
+        <mapping resource="org/web/prueba/Articulo.hbm.xml" />
+        <mapping resource="org/web/prueba/Organizacion.hbm.xml" />
+        <mapping resource="org/web/prueba/Cliente.hbm.xml" />
+        <mapping resource="org/web/prueba/ClienteOrganizacion.hbm.xml" />
+        <mapping resource="org/web/prueba/PedidoArticulo.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05/09/2014 17:49:27 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.web.prueba.ClienteOrganizacion" table="ClienteOrganizacion" catalog="BasePPP">
+        <id name="idcliOrg" type="java.lang.Integer">
+            <column name="IDCliOrg" />
+            <generator class="identity" />
+        </id>
+        <property name="cuit" type="java.lang.Integer">
+            <column name="Cuit">
+                <comment>Es el cuit del cliente u organizaci&#195;&#179;n.</comment>
+            </column>
+        </property>
+        <property name="dir" type="string">
+            <column name="Dir" length="50">
+                <comment>Es la direcci&#195;&#179;n del cliente u organizaci&#195;&#179;n.</comment>
+            </column>
+        </property>
+        <property name="tel1" type="java.lang.Integer">
+            <column name="Tel1">
+                <comment>Es el tel&#195;&#169;fono principal de contacto del cliente u organizaci&#195;&#179;n.</comment>
+            </column>
+        </property>
+        <property name="tel2" type="java.lang.Integer">
+            <column name="Tel2">
+                <comment>Es el tel&#195;&#169;fono secundario de contacto del cliente u organizaci&#195;&#179;n.</comment>
+            </column>
+        </property>
+        <property name="eml" type="string">
+            <column name="Eml" length="50">
+                <comment>Es el e-mail principal de contacto del cliente u organizaci&#195;&#179;n.</comment>
+            </column>
+        </property>
+        <one-to-one name="organizacion" class="org.web.prueba.Organizacion"></one-to-one>
+        <one-to-one name="cliente" class="org.web.prueba.Cliente"></one-to-one>
+        <set name="pedidos" table="Pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCliOrg" not-null="true">
+                    <comment>Es el identificador de cliente u organizaci&#195;&#179;n. Es un indice.</comment>
+                </column>
+            </key>
+            <one-to-many class="org.web.prueba.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>
