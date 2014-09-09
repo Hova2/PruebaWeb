@@ -1,1 +1,8 @@
 /build/
+/.git/
+/.settings/
+.classpath
+.project
+/src/hibernate.cfg.xml
+/src/hibernate.reveng.xml
+/WebContent/META-INF/
