@@ -11,15 +11,25 @@
         	<p:tab title="Clientes">
             	<p:panelGrid columns="1">
     				<f:facet name="header">
-        				<p:graphicImage value="plus.jpg" width="40px" height="%40px"/>
+        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
     				</f:facet>
- 					<h:outputText value="Cargar cliente" />
+ 					<p:commandButton id="bcom" value="Cargar cliente">
+ 						<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+
+ 
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+        
+    </p:confirmDialog>
+    				
+    				</p:commandButton>
+    				
+ 					
    				 </p:panelGrid>
    			</p:tab>
 	        <p:tab title="Articulos">
             	<p:panelGrid columns="1">
     				<f:facet name="header">
-        				<p:graphicImage value="plus.jpg" width="40px" height="%40px"/>
+        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
     				</f:facet>
  					<h:outputText value="Cargar articulo" />
    				 </p:panelGrid>
@@ -27,11 +37,14 @@
 	        <p:tab title="Pedidos">
 	            	<p:panelGrid columns="1">
 	    				<f:facet name="header">
-	        				<p:graphicImage value="plus.jpg" width="40px" height="%40px"/>
+	        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
 	    				</f:facet>
 	 					<h:outputText value="Cargar pedido" />
 	   				 </p:panelGrid>
 		   	</p:tab>
     	</p:tabView>
+    	
+    	
+    	
 	</h:body>
 </html>

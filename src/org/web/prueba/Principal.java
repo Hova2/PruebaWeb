@@ -94,22 +94,22 @@ public class Principal implements Serializable{
 		SessionFactory Sesion = CreaSesion.getSessionFactory();
 		Session SAbierta = Sesion.openSession();
 		
-		ClienteOrganizacion CO = new ClienteOrganizacion();
+		ClienteOrganizacion co = new ClienteOrganizacion();
 		Cliente Cli = new Cliente();
 		
-		CO.setCuit(this.cuit);
-		CO.setDir(this.dir);
-		CO.setTel1(this.tel1);
-		CO.setTel2(this.tel2);
-		CO.setEml(this.eml);
-		CO.setCliente(Cli);
+		co.setCuit(this.cuit);
+		co.setDir(this.dir);
+		co.setTel1(this.tel1);
+		co.setTel2(this.tel2);
+		co.setEml(this.eml);
+		co.setCliente(Cli);
 		Cli.setApe(this.ape);
 		Cli.setNom(this.nom);
 		Cli.setDni(this.dni);
-		Cli.setClienteOrganizacion(CO);
+		Cli.setClienteOrganizacion(co);
 		SAbierta.beginTransaction();
-		SAbierta.save(CO);
-		Cli.setIdcli(CO.getIdcliOrg());
+		SAbierta.save(co);
+		Cli.setIdcli(co.getIdcliOrg());
 		SAbierta.save(Cli);
 		SAbierta.getTransaction().commit();
 		SAbierta.close();
