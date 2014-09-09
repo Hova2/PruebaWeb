@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+    <title>Welcome to JSF_PrimeFaces_Hibernate Project</title>
+</h:head>
+<body>
+    <h:form>
+        <p:dataTable id="users" value="#{PrincipalB.TCli()}" var="cliente" style="width: 100%">
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="N° de Cliente" />
+                </f:facet>
+                <h:outputText value="#{cliente.idcliOrg}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Rason Social" />
+                </f:facet>
+                <h:outputText value="#{cliente.organizacion.raso}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Nombre" />
+                </f:facet>
+                <h:outputText value="#{cliente.cliente.nom}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Apellido" />
+                </f:facet>
+                <h:outputText value="#{cliente.cliente.ape}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="DNI" />
+                </f:facet>
+                <h:outputText value="#{cliente.cliente.dni}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Cuit" />
+                </f:facet>
+                <h:outputText value="#{cliente.cuit}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Direccion" />
+                </f:facet>
+                <h:outputText value="#{cliente.dir}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Telefono 1" />
+                </f:facet>
+                <h:outputText value="#{cliente.tel1}" />
+            </p:column>
+        	<p:column>
+                <f:facet name="header">
+                    <h:outputText value="Telefono 2" />
+                </f:facet>
+                <h:outputText value="#{cliente.tel2}" />
+            </p:column>
+        	<p:column>
+                <f:facet name="header">
+                    <h:outputText value="E-Mail" />
+                </f:facet>
+                <h:outputText value="#{cliente.eml}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</body>
+</html>

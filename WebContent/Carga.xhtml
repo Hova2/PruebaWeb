@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui">  
+ 
+ <h:head><title>Carga Clientes</title></h:head>
+ <body>
+     <h:form>
+         <table>
+          <tr>
+                <td><h:outputLabel for="cuit" value="CUIT:" /></td>
+                <td><p:inputText id="cuit" value="#{PrincipalB.cuit}" /></td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="dir" value="Direccion:" /></td>
+                <td><p:inputText id="dir" value="#{PrincipalB.dir}"/></td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="tel1" value="Telefono 1:" /></td>
+                <td><p:inputText id="tel1" value="#{PrincipalB.tel1}"/></td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="tel2" value="Telefono 2:" /></td>
+                <td><p:inputText id="tel2" value="#{PrincipalB.tel2}"/></td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="eml" value="E-Mail:" /></td>
+                <td><p:inputText id="eml" value="#{PrincipalB.eml}"/></td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="nom" value="Nombre:" /></td>
+                <td><p:inputText id="nom" value="#{PrincipalB.nom}"/></td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="ape" value="Apellido:" /></td>
+                <td><p:inputText id="ape" value="#{PrincipalB.ape}"/></td>
+             </tr>
+             <tr>
+                <td><h:outputLabel for="dni" value="DNI:" /></td>
+                <td><p:inputText id="dni" value="#{PrincipalB.dni}"/></td>
+             </tr>
+             <tr>
+                <td><p:commandButton id="submit" value="Guardar" action="#{PrincipalB.SCli}" ajax="false"/></td>
+             </tr>
+         </table>
+     </h:form>
+</body>
+</html>
