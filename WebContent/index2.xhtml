@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<h:head>
+		<title>Index WebApp PPP</title>
+	</h:head>
+	<h:body>		
+		<p:tabView dynamic="true" cache="true">
+        	<p:tab title="Clientes">
+            	<p:panelGrid columns="1">
+    				<f:facet name="header">
+        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
+    				</f:facet>
+ 					<p:commandButton id="bcom" type="button" value="Cargar cliente" onclick="PF('pdiacaruse').show()" />
+ 					<p:dialog id="dlg" header="Carga de cliente" showEffect="explode" hideEffect="explode" widgetVar="pdiacaruse" modal="true" resizable="false">
+ 					<h:form id="idcarg">
+         			<p:panelGrid columns="2">
+         			
+                <p:outputLabel value="CUIT:" />
+                <p:inputText value="#{PrincipalB.cuit}" />
+             
+                <p:outputLabel value="Direccion:" />
+                <p:inputText value="#{PrincipalB.dir}"/>
+             
+             
+               <p:outputLabel value="Telefono 1:" />
+               <p:inputText value="#{PrincipalB.tel1}"/>
+             
+             
+               <p:outputLabel value="Telefono 2:" />
+               <p:inputText value="#{PrincipalB.tel2}"/>
+             
+             
+               <p:outputLabel value="E-Mail:" />
+               <p:inputText value="#{PrincipalB.eml}"/>
+             
+             
+                <p:outputLabel value="Nombre:" />
+                <p:inputText value="#{PrincipalB.nom}"/>
+             
+             
+                <p:outputLabel value="Apellido:" />
+                <p:inputText value="#{PrincipalB.ape}"/>
+             
+             
+                <p:outputLabel value="DNI:" />
+                <p:inputText value="#{PrincipalB.dni}"/>
+             
+             </p:panelGrid>
+             <p:commandButton value="Guardar" action="#{PrincipalB.SCli}" onclick="PF('pdiacaruse').hide()"/>
+        
+     </h:form>
+ 					</p:dialog>	
+    				
+ 					
+   				 </p:panelGrid>
+   			</p:tab>
+	        <p:tab title="Articulos">
+            	<p:panelGrid columns="1">
+    				<f:facet name="header">
+        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
+    				</f:facet>
+ 					<h:outputText value="Cargar articulo" />
+   				 </p:panelGrid>
+	   		</p:tab>
+	        <p:tab title="Pedidos">
+	            	<p:panelGrid columns="1">
+	    				<f:facet name="header">
+	        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
+	    				</f:facet>
+	 					<h:outputText value="Cargar pedido" />
+	   				 </p:panelGrid>
+		   	</p:tab>
+    	</p:tabView>
+    	
+    	
+    	
+	</h:body>
+</html>
