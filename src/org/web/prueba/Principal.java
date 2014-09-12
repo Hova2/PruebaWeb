@@ -17,7 +17,16 @@ public class Principal implements Serializable{
 	private String ape;
 	private int dni;
 	private String raso;
-	
+	private String orgocli;
+
+	public String getOrgocli() {
+		return orgocli;
+	}
+
+	public void setOrgocli(String orgocli) {
+		this.orgocli = orgocli;
+	}
+		
 	public int getCuit(){
 		return this.cuit;
 	}
