@@ -13,15 +13,46 @@
     				<f:facet name="header">
         				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
     				</f:facet>
- 					<p:commandButton id="bcom" value="Cargar cliente">
- 						<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
-
- 
-    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+ 					<p:commandButton id="bcom" type="button" value="Cargar cliente" onclick="PF('pdiacaruse').show()" />
+ 					<p:dialog id="dlg" header="Carga de cliente" showEffect="explode" hideEffect="explode" widgetVar="pdiacaruse" modal="true" resizable="false">
+ 					<h:form id="idcarg">
+         			<p:panelGrid columns="2">
+         			
+                <p:outputLabel value="CUIT:" />
+                <p:inputText value="#{PrincipalB.cuit}" />
+             
+                <p:outputLabel value="Direccion:" />
+                <p:inputText value="#{PrincipalB.dir}"/>
+             
+             
+               <p:outputLabel value="Telefono 1:" />
+               <p:inputText value="#{PrincipalB.tel1}"/>
+             
+             
+               <p:outputLabel value="Telefono 2:" />
+               <p:inputText value="#{PrincipalB.tel2}"/>
+             
+             
+               <p:outputLabel value="E-Mail:" />
+               <p:inputText value="#{PrincipalB.eml}"/>
+             
+             
+                <p:outputLabel value="Nombre:" />
+                <p:inputText value="#{PrincipalB.nom}"/>
+             
+             
+                <p:outputLabel value="Apellido:" />
+                <p:inputText value="#{PrincipalB.ape}"/>
+             
+             
+                <p:outputLabel value="DNI:" />
+                <p:inputText value="#{PrincipalB.dni}"/>
+             
+             </p:panelGrid>
+             <p:commandButton value="Guardar" action="#{PrincipalB.SCli}" onclick="PF('pdiacaruse').hide()"/>
         
-    </p:confirmDialog>
-    				
-    				</p:commandButton>
+     </h:form>
+ 					</p:dialog>	
     				
  					
    				 </p:panelGrid>
