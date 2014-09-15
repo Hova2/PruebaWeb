@@ -14,9 +14,16 @@
         				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
     				</f:facet>
  					<p:commandButton id="BCCliente" type="button" value="Cargar cliente" onclick="PF('PDVCCliente').show()" />
- 					<p:dialog id="PDCCliente" header="Cargar cliente" showEffect="explode" hideEffect="explode" widgetVar="PDVCCliente" modal="true" resizable="false">
- 						<h:form id="FPDCCliente">
-         					<p:panelGrid columns="2">
+ 					<p:dialog id="PDCCliente" header="Cargar cliente" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
+ 						<p:panelGrid id="PGOrgocli" columns="2">
+	        					<p:outputLabel value="Nombre:" />
+				                <p:inputText value="#{PrincipalB.nom}" disabled="#{PrincipalB.orgocli != 'Cli'}"/>
+				                <p:outputLabel value="Apellido:" />
+				                <p:inputText value="#{PrincipalB.ape}" disabled="#{PrincipalB.orgocli != 'Cli'}"/>
+				                <p:outputLabel value="DNI:" />
+				                <p:inputText value="#{PrincipalB.dni}" disabled="#{PrincipalB.orgocli != 'Cli'}"/>
+				                <p:outputLabel value="Razon social:" />
+				                <p:inputText value="#{PrincipalB.raso}" disabled="#{PrincipalB.orgocli != 'Org'}"/>
 	        					<p:outputLabel value="CUIT:" />
 	               				<p:inputText value="#{PrincipalB.cuit}" />
 				                <p:outputLabel value="Direccion:" />
@@ -26,28 +33,16 @@
 								<p:outputLabel value="Telefono 2:" />
 				                <p:inputText value="#{PrincipalB.tel2}"/>
 				                <p:outputLabel value="E-Mail:" />
-				                <p:inputText value="#{PrincipalB.eml}"/>
-				                <p:outputLabel value="Nombre:" />
-				                <p:inputText value="#{PrincipalB.nom}"/>
-				                <p:outputLabel value="Apellido:" />
-				                <p:inputText value="#{PrincipalB.ape}"/>
-				                <p:outputLabel value="DNI:" />
-				                <p:inputText value="#{PrincipalB.dni}"/>
-				                <p:selectOneRadio id="SORCliente" value="#{PrincipalB.orgocli}">
-				                	<f:selectItem itemLabel="Organizacion" itemValue="ROrg" />
-   									<f:selectItem itemLabel="Cliente" itemValue="RCli" />
-				                	<f:ajax execute="SORCliente" render="#{PrincipalB.orgocli}" />
-				                </p:selectOneRadio>
-				               
-				                	<p:outputLabel id="ROrg" rendered="false" value="Organizacion" />
-				         
-				               
-				                	<p:outputLabel id="RCli" rendered="false" value="Cliente" />
-				             
-             				</p:panelGrid>
-             				
-           				<p:commandButton value="Guardar" action="#{PrincipalB.SCli}" onclick="PF('PDVCCliente').hide()"/>
-     					</h:form>
+				                <p:inputText value="#{PrincipalB.eml}"/>				                				                
+				           </p:panelGrid>
+				           <p:selectOneRadio id="SORCliente" value="#{PrincipalB.orgocli}">
+				                	<f:selectItem itemLabel="Cliente" itemValue="Cli" />
+				                	<f:selectItem itemLabel="Organizacion" itemValue="Org" />   									
+				                	<p:ajax event="change" update="PGOrgocli" process="@this"/>
+				           </p:selectOneRadio>  
+				           <p:commandButton value="Guardar" action="#{PrincipalB.SCli}" onclick="PF('PDVCCliente').hide()"/>           				
+           				
+           				
  					</p:dialog>	    				 					
    				 </p:panelGrid>
    			</p:tab>

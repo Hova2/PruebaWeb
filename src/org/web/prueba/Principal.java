@@ -17,16 +17,8 @@ public class Principal implements Serializable{
 	private String ape;
 	private int dni;
 	private String raso;
-	private String orgocli;
-
-	public String getOrgocli() {
-		return orgocli;
-	}
-
-	public void setOrgocli(String orgocli) {
-		this.orgocli = orgocli;
-	}
-		
+	private String orgocli = "Cli";
+				
 	public int getCuit(){
 		return this.cuit;
 	}
@@ -99,28 +91,49 @@ public class Principal implements Serializable{
 		this.raso = raso;
 	}
 	
+	public String getOrgocli() {
+		return orgocli;
+	}
+
+	public void setOrgocli(String orgocli) {
+		this.orgocli = orgocli;
+	}
+	
 	public void SCli(){
 		SessionFactory Sesion = CreaSesion.getSessionFactory();
 		Session SAbierta = Sesion.openSession();
 		
 		ClienteOrganizacion co = new ClienteOrganizacion();
-		Cliente Cli = new Cliente();
-		
+					
 		co.setCuit(this.cuit);
 		co.setDir(this.dir);
 		co.setTel1(this.tel1);
 		co.setTel2(this.tel2);
 		co.setEml(this.eml);
-		co.setCliente(Cli);
-		Cli.setApe(this.ape);
-		Cli.setNom(this.nom);
-		Cli.setDni(this.dni);
-		Cli.setClienteOrganizacion(co);
-		SAbierta.beginTransaction();
-		SAbierta.save(co);
-		Cli.setIdcli(co.getIdcliOrg());
-		SAbierta.save(Cli);
-		SAbierta.getTransaction().commit();
+		
+		if (this.getOrgocli().equals("Cli")) {
+			Cliente Cli = new Cliente();
+			co.setCliente(Cli);
+			Cli.setApe(this.ape);
+			Cli.setNom(this.nom);
+			Cli.setDni(this.dni);
+			Cli.setClienteOrganizacion(co);
+			SAbierta.beginTransaction();
+			SAbierta.save(co);
+			Cli.setIdcli(co.getIdcliOrg());
+			SAbierta.save(Cli);
+			SAbierta.getTransaction().commit();
+		} else {
+			Organizacion org = new Organizacion();
+			co.setOrganizacion(org);
+			org.setRaso(this.raso);
+			org.setClienteOrganizacion(co);
+			SAbierta.beginTransaction();
+			SAbierta.save(co);
+			org.setIdorg(co.getIdcliOrg());
+			SAbierta.save(org);
+			SAbierta.getTransaction().commit();
+		}
 		SAbierta.close();
 		Sesion.close();
 	}

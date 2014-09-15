@@ -7,35 +7,25 @@
 		<title>Index WebApp PPP</title>
 	</h:head>
 	<h:body>		
-		<p:tabView dynamic="true" cache="true">
-        	<p:tab title="Clientes">
-            	<p:panelGrid columns="1">
-    				<f:facet name="header">
-        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
-    				</f:facet>
- 					<p:commandButton id="BCCliente" type="button" value="Cargar cliente" />
- 					
- 					</p:panelGrid>
-   			</p:tab>
-	        <p:tab title="Articulos">
-            	<p:panelGrid columns="1">
-    				<f:facet name="header">
-        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
-    				</f:facet>
- 					<p:commandButton id="BCArticulo" type="button" value="Cargar articulo" />
- 					
-   				 </p:panelGrid>
-	   		</p:tab>
-	        <p:tab title="Pedidos">
-	            	<p:panelGrid columns="1">
-	    				<f:facet name="header">
-	        				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
-	    				</f:facet>
-	 					<p:commandButton id="BCPedido" type="button" value="Cargar pedido" />
-	 					
-	   				 </p:panelGrid>
-		   	</p:tab>
-    	</p:tabView>
+		<h:form>
+		<p:selectOneRadio id="sotorgocli" value="#{PrincipalB.orgocli}" required="true" requiredMessage="Seleccione" >
+			<f:selectItem itemLabel="Organizacion" itemValue="Org" />
+			<f:selectItem itemLabel="Cliente" itemValue="Cli" />
+			<p:ajax event="change" update=":form2" process="@this" />
+			<p:commandButton value="Guardar" action="#{PrincipalB.SCli}" />
+		</p:selectOneRadio>
+		
+		</h:form>
+		
+		<h:form id="form2">
+			<p:outputLabel value="#{PrincipalB.orgocli}" />
+			<p:inputText rendered="#{PrincipalB.orgocli == 'Org'}" value="#{PrincipalB.raso}" />
+			<p:inputText rendered="#{PrincipalB.orgocli == 'Cli'}" value="#{PrincipalB.nom}" />
+			<p:inputText rendered="#{PrincipalB.orgocli == 'Cli'}" value="#{PrincipalB.ape}" />
+			
+		</h:form>
+		
+
     	
     	
 	</h:body>
