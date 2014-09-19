@@ -8,7 +8,7 @@
             <column name="IDCliOrg" />
             <generator class="identity" />
         </id>
-        <property name="cuit" type="java.lang.Integer">
+        <property name="cuit" type="java.lang.Long">
             <column name="Cuit">
                 <comment>Es el cuit del cliente u organizaci&#195;&#179;n.</comment>
             </column>

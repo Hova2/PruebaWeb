@@ -11,7 +11,7 @@ import java.util.Set;
 public class ClienteOrganizacion implements java.io.Serializable {
 
 	private Integer idcliOrg;
-	private Integer cuit;
+	private Long cuit;
 	private String dir;
 	private Integer tel1;
 	private Integer tel2;
@@ -23,7 +23,7 @@ public class ClienteOrganizacion implements java.io.Serializable {
 	public ClienteOrganizacion() {
 	}
 
-	public ClienteOrganizacion(Integer cuit, String dir, Integer tel1,
+	public ClienteOrganizacion(Long cuit, String dir, Integer tel1,
 			Integer tel2, String eml, Organizacion organizacion,
 			Cliente cliente, Set pedidos) {
 		this.cuit = cuit;
@@ -44,11 +44,11 @@ public class ClienteOrganizacion implements java.io.Serializable {
 		this.idcliOrg = idcliOrg;
 	}
 
-	public Integer getCuit() {
+	public Long getCuit() {
 		return this.cuit;
 	}
 
-	public void setCuit(Integer cuit) {
+	public void setCuit(Long cuit) {
 		this.cuit = cuit;
 	}
 

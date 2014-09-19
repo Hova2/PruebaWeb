@@ -9,7 +9,7 @@ import org.primefaces.context.RequestContext;
 
 public class Principal implements Serializable{
 
-	private int cuit;
+	private long cuit;
 	private String dir;
 	private int tel1;
 	private int tel2;
@@ -19,11 +19,11 @@ public class Principal implements Serializable{
 	private int dni;
 	private String raso;	
 				
-	public int getCuit(){
+	public long getCuit(){
 		return this.cuit;
 	}
 	
-	public void setCuit(int cuit){
+	public void setCuit(long cuit){
 		this.cuit = cuit;
 	}
 	
