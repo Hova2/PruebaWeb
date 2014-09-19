@@ -33,9 +33,9 @@
     	</p:tabView>
     	
     	<p:dialog id="PDCCliente" header="Cargar cliente" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
- 			<p:tabView id="PDTV">
- 				<p:tab id="PDTVT1" title="Cargar cliente">
- 					<h:form id="FPGCCli">
+ 			<p:tabView id="TV">
+ 				<p:tab id="T1" title="Cargar cliente">
+ 					<h:form id="FC">
 	 					<p:panelGrid id="PGCCli" columns="2">
 		        			<p:outputLabel value="Nombre:" />
 					        <p:inputText value="#{PrincipalB.nom}" />
@@ -55,13 +55,13 @@
 					        <p:inputText value="#{PrincipalB.eml}"/>				                				                
 				        </p:panelGrid>
 				        <p:commandButton resetValues="true" value="Guardar" action="#{PrincipalB.CCli}" onclick="PF('PDVCCliente').hide()">
-				        	<p:resetInput target="FPGCCli" />
+				        	<p:ajax update="PGCCli :TV:FO:PGCOrg" />
 				        	
 				        </p:commandButton>				         							
  					</h:form>
  				</p:tab>
- 				<p:tab id="PDTVT2" title="Cargar organizacion">
- 					<h:form id="FPGCOrg">
+ 				<p:tab id="T2" title="Cargar organizacion">
+ 					<h:form id="FO">
 	 					<p:panelGrid id="PGCOrg" columns="2">
 		        			<p:outputLabel value="Razon social:" />
 					        <p:inputText value="#{PrincipalB.raso}" />
@@ -77,7 +77,7 @@
 					        <p:inputText value="#{PrincipalB.eml}"/>				                				                
 				        </p:panelGrid>
 				        <p:commandButton resetValues="true" value="Guardar" action="#{PrincipalB.COrg}" onclick="PF('PDVCCliente').hide()">
-				        	<p:resetInput target="FPGCOrg" />
+				        		<p:ajax update="PGCOrg :TV:FC:PGCCli" />
 				        	
 				        </p:commandButton>
 			        </h:form>
