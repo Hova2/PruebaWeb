@@ -54,10 +54,7 @@
 					        <p:outputLabel value="E-Mail:" />
 					        <p:inputText value="#{PrincipalB.eml}"/>				                				                
 				        </p:panelGrid>
-				        <p:commandButton resetValues="true" value="Guardar" action="#{PrincipalB.CCli}" onclick="PF('PDVCCliente').hide()">
-				        	<p:ajax update="PGCCli :TV:FO:PGCOrg" />
-				        	
-				        </p:commandButton>				         							
+				        <p:commandButton resetValues="true" value="Guardar" action="#{PrincipalB.CCli}" onclick="PF('PDVCCliente').hide()" />
  					</h:form>
  				</p:tab>
  				<p:tab id="T2" title="Cargar organizacion">
@@ -76,13 +73,11 @@
 					        <p:outputLabel value="E-Mail:" />
 					        <p:inputText value="#{PrincipalB.eml}"/>				                				                
 				        </p:panelGrid>
-				        <p:commandButton resetValues="true" value="Guardar" action="#{PrincipalB.COrg}" onclick="PF('PDVCCliente').hide()">
-				        		<p:ajax update="PGCOrg :TV:FC:PGCCli" />
-				        	
-				        </p:commandButton>
+				        <p:commandButton resetValues="true" value="Guardar" action="#{PrincipalB.COrg}" onclick="PF('PDVCCliente').hide()" />
 			        </h:form>
  				</p:tab>
  			</p:tabView>
+ 			<p:ajax update="@this" />
  		</p:dialog>
 	</h:body>
 </html>
