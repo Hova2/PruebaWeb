@@ -6,7 +6,10 @@
 	<h:head>
 		<title>Index WebApp PPP</title>
 	</h:head>
-	<h:body>		
+	<h:body>
+		<f:facet name="last">
+			<h:outputStylesheet library="css" name="estilos.css" />
+		</f:facet>		
 		<p:tabView dynamic="true" cache="true">
         	<p:tab title="Clientes">
             	<p:panelGrid columns="1">
@@ -36,7 +39,7 @@
  			<p:tabView id="TV">
  				<p:tab id="T1" title="Cargar cliente">
  					<h:form id="FC">
-	 					<p:panelGrid id="PGCCli" columns="3">
+	 					<p:panelGrid id="PGCCli" columns="3" styleClass="sinborde">
 		        			<p:outputLabel value="Nombre:" />
 					        <p:inputText id="CNom" value="#{PrincipalB.nom}" required="true">
 					        	<f:validateLength minimum="2" />
@@ -69,21 +72,29 @@
  				</p:tab>
  				<p:tab id="T2" title="Cargar organizacion">
  					<h:form id="FO">
-	 					<p:panelGrid id="PGCOrg" columns="3">
+	 					<p:panelGrid id="PGCOrg" columns="3" styleClass="sinborde">
 		        			<p:outputLabel value="Razon social:" />
-					        <p:inputText value="#{PrincipalB.raso}" />
+					        <p:inputText id="CRaso" value="#{PrincipalB.raso}" required="true">
+		        				<f:validateLength minimum="2" />
+					        </p:inputText>
+		        			<p:message for="CRaso" display="icon" />
 		        			<p:outputLabel value="CUIT:" />
 		               		<p:inputText value="#{PrincipalB.cuit}" />
+					        <p:message for="CRaso" display="icon" />
 					        <p:outputLabel value="Direccion:" />
 					        <p:inputText value="#{PrincipalB.dir}"/>
+					        <p:message for="CRaso" display="icon" />
 					        <p:outputLabel value="Telefono 1:" />
 		              		<p:inputText value="#{PrincipalB.tel1}"/>
+							<p:message for="CRaso" display="icon" />
 							<p:outputLabel value="Telefono 2:" />
 					        <p:inputText value="#{PrincipalB.tel2}"/>
+					        <p:message for="CRaso" display="icon" />
 					        <p:outputLabel value="E-Mail:" />
-					        <p:inputText value="#{PrincipalB.eml}"/>				                				                
+					        <p:inputText value="#{PrincipalB.eml}"/>
+					        <p:message for="CRaso" display="icon" />				                				                
 				        </p:panelGrid>
-				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="@this"/>
+				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg"/>
 			        </h:form>
  				</p:tab>
  			</p:tabView>
