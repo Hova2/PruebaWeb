@@ -35,16 +35,16 @@
 		   	</p:tab>
     	</p:tabView>
     	
-    	<p:dialog id="PDCCliente" header="Cargar cliente" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
+    	<p:dialog id="PDCCliente" header="Cargar cliente" showEffect="explode" resizable="true" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
  			<p:tabView id="TV">
  				<p:tab id="T1" title="Cargar cliente">
  					<h:form id="FC">
 	 					<p:panelGrid id="PGCCli" columns="3" styleClass="sinborde">
 		        			<p:outputLabel value="Nombre:" />
-					        <p:inputText id="CNom" value="#{PrincipalB.nom}" required="true">
+					        <p:inputText id="CNom" value="#{PrincipalB.nom}" required="true" requiredMessage="Ingrese un nombre" validatorMessage="El nombre debe tener al menos 2 caracteres ">
 					        	<f:validateLength minimum="2" />
 					        </p:inputText>
-					        <p:message for="CNom" display="icon" />
+					        <p:message for="CNom" />
 					     	<p:outputLabel value="Apellido:" />
 					        <p:inputText value="#{PrincipalB.ape}" />
 					        <p:message for="CNom" display="icon" />

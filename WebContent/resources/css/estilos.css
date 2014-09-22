@@ -1,3 +1,7 @@
 .sinborde td, .sinborde tr{
 	border: none !important;
 }
+
+.sinborde{
+	width: 100% !important; 
+}
