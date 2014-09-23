@@ -9,45 +9,45 @@ import org.primefaces.context.RequestContext;
 
 public class Principal implements Serializable{
 
-	private long cuit;
+	private Long cuit;
 	private String dir;
-	private int tel1;
-	private int tel2;
+	private Integer tel1;
+	private Integer tel2;
 	private String eml;
 	private String nom;
 	private String ape;
-	private int dni;
+	private Integer dni;
 	private String raso;	
 				
-	public long getCuit(){
+	public  Long getCuit(){
 		return this.cuit;
 	}
 	
-	public void setCuit(long cuit){
+	public void setCuit(Long cuit){
 		this.cuit = cuit;
 	}
 	
-	public int getTel1(){
+	public Integer getTel1(){
 		return this.tel1;
 	}
 	
-	public void setTel1(int tel1){
+	public void setTel1(Integer tel1){
 		this.tel1 = tel1;
 	}
 	
-	public int getTel2(){
+	public Integer getTel2(){
 		return this.tel2;
 	}
 	
-	public void setTel2(int tel2){
+	public void setTel2(Integer tel2){
 		this.tel2 = tel2;
 	}
 	
-	public int getDni(){
+	public Integer getDni(){
 		return this.dni;
 	}
 	
-	public void setDni(int dni){
+	public void setDni(Integer dni){
 		this.dni = dni;
 	}
 	
@@ -91,6 +91,19 @@ public class Principal implements Serializable{
 		this.raso = raso;
 	}
 	
+	public void ResetValues(){
+		this.setNom(null);
+		this.setApe(null);
+		this.setDni(null);
+		this.setCuit(null);
+		this.setDir(null);
+		this.setTel1(null);
+		this.setTel2(null);
+		this.setEml(null);
+		this.setRaso(null);
+	}
+	
+	
 	public void CCli(){
 		SessionFactory sesion = CreaSesion.getSessionFactory();
 		Session sabierta = sesion.openSession();
@@ -113,6 +126,7 @@ public class Principal implements Serializable{
 		cli.setIdcli(co.getIdcliOrg());
 		sabierta.save(cli);
 		sabierta.getTransaction().commit();
+		this.ResetValues();
 		}
 	
 	public void COrg(){
@@ -137,6 +151,7 @@ public class Principal implements Serializable{
 		sabierta.getTransaction().commit();
 		sabierta.close();
 		sesion.close();
+		this.ResetValues();
 	}
 	
 	public List TCli(){

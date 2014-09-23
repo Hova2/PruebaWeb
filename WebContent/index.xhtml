@@ -35,70 +35,118 @@
 		   	</p:tab>
     	</p:tabView>
     	
-    	<p:dialog id="PDCCliente" header="Cargar cliente" showEffect="explode" resizable="true" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
+    	<p:dialog id="PDCCliente" header="Cargar cliente" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
  			<p:tabView id="TV">
  				<p:tab id="T1" title="Cargar cliente">
  					<h:form id="FC">
 	 					<p:panelGrid id="PGCCli" columns="3" styleClass="sinborde">
-		        			<p:outputLabel value="Nombre:" />
-					        <p:inputText id="CNom" value="#{PrincipalB.nom}" required="true" requiredMessage="Ingrese un nombre" validatorMessage="El nombre debe tener al menos 2 caracteres ">
-					        	<f:validateLength minimum="2" />
+		        			<p:outputLabel value="(*) Nombre:" />
+					        <p:inputText id="CNom" value="#{PrincipalB.nom}" required="true" requiredMessage="Ingrese un nombre" validatorMessage="Debe tener al menos 2 caracteres ">
+						        <f:validateLength minimum="2" />								
 					        </p:inputText>
 					        <p:message for="CNom" />
-					     	<p:outputLabel value="Apellido:" />
-					        <p:inputText value="#{PrincipalB.ape}" />
-					        <p:message for="CNom" display="icon" />
-					        <p:outputLabel value="DNI:" />
-					        <p:inputText value="#{PrincipalB.dni}" />
-		        			<p:message for="CNom" display="icon" />
+					     		
+					     	<p:outputLabel value="(*) Apellido:" />
+					        <p:inputText id="CApe" value="#{PrincipalB.ape}" required="true" requiredMessage="Ingrese un apellido" validatorMessage="Debe tener al menos 2 caracteres ">
+					        	<f:validateLength minimum="2" />
+					        </p:inputText>
+					        <p:message for="CApe" />
+					        
+					        <p:outputLabel value="(*) D.N.I:" />
+					        <p:inputText id="CDNI" value="#{PrincipalB.dni}" required="true" requiredMessage="Ingrese un D.N.I" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s" >
+		        				<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />  			
+		        			</p:inputText>
+		        			<p:message for="CDNI" />
+		        			
 		        			<p:outputLabel value="CUIT:" />
-		               		<p:inputText value="#{PrincipalB.cuit}" />
-					        <p:message for="CNom" display="icon" />
-					        <p:outputLabel value="Direccion:" />
-					        <p:inputText value="#{PrincipalB.dir}"/>
-					        <p:message for="CNom" display="icon" />
+		               		<p:inputText id="CCUIT" value="#{PrincipalB.cuit}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		               			<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+		               		</p:inputText>
+					        <p:message for="CCUIT" />					        
+					 		
+					        <p:outputLabel value="Direccion:"  />
+					        <p:inputText id="CDir" value="#{PrincipalB.dir}" validatorMessage="Debe tener al menos 2 caracteres">
+					        	<f:validateLength minimum="2" />
+					        </p:inputText>
+					        <p:message for="CDir" />
+					        
+					        
 					        <p:outputLabel value="Telefono 1:" />
-		              		<p:inputText value="#{PrincipalB.tel1}"/>
-							<p:message for="CNom" display="icon" />
+		              		<p:inputText id="CTel1" value="#{PrincipalB.tel1}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		              			<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+		              		</p:inputText>
+							<p:message for="CTel1" />
+							
 							<p:outputLabel value="Telefono 2:" />
-					        <p:inputText value="#{PrincipalB.tel2}"/>
-					        <p:message for="CNom" display="icon" />
+					        <p:inputText id="CTel2" value="#{PrincipalB.tel2}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+					        	<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+					        </p:inputText>
+					        <p:message for="CTel2" />
+					        
 					        <p:outputLabel value="E-Mail:" />
-					        <p:inputText value="#{PrincipalB.eml}"/>
-					        <p:message for="CNom" display="icon" />				                				                
+					        <p:inputText id="CEml" value="#{PrincipalB.eml}" validatorMessage="Ingrese una direccion valida">
+					        	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					        </p:inputText>
+					        <p:message for="CEml"/>				                				                
 				        </p:panelGrid>
-				        <p:commandButton value="Guardar" action="#{PrincipalB.CCli}" update="PGCCli"/>
+				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
+				        <br/>
+				        <p:commandButton value="Guardar" action="#{PrincipalB.CCli}" update="PGCCli :TV:FO:PGCOrg"/>
  					</h:form>
  				</p:tab>
  				<p:tab id="T2" title="Cargar organizacion">
  					<h:form id="FO">
 	 					<p:panelGrid id="PGCOrg" columns="3" styleClass="sinborde">
-		        			<p:outputLabel value="Razon social:" />
-					        <p:inputText id="CRaso" value="#{PrincipalB.raso}" required="true">
+		        			<p:outputLabel value="(*) Razon social:" />
+					        <p:inputText id="CRaso" value="#{PrincipalB.raso}" required="true" requiredMessage="Ingrese una razon social" validatorMessage="Debe tener al menos 2 caracteres">
 		        				<f:validateLength minimum="2" />
 					        </p:inputText>
-		        			<p:message for="CRaso" display="icon" />
+		        			<p:message for="CRaso" />
 		        			<p:outputLabel value="CUIT:" />
-		               		<p:inputText value="#{PrincipalB.cuit}" />
-					        <p:message for="CRaso" display="icon" />
-					        <p:outputLabel value="Direccion:" />
-					        <p:inputText value="#{PrincipalB.dir}"/>
-					        <p:message for="CRaso" display="icon" />
+		               		<p:inputText id="CCUIT" value="#{PrincipalB.cuit}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		               			<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+		               		</p:inputText>
+					        <p:message for="CCUIT" />					        
+					 		
+					        <p:outputLabel value="Direccion:"  />
+					        <p:inputText id="CDir" value="#{PrincipalB.dir}" validatorMessage="Debe tener al menos 2 caracteres">
+					        	<f:validateLength minimum="2" />
+					        </p:inputText>
+					        <p:message for="CDir" />
+					        
+					        
 					        <p:outputLabel value="Telefono 1:" />
-		              		<p:inputText value="#{PrincipalB.tel1}"/>
-							<p:message for="CRaso" display="icon" />
+		              		<p:inputText id="CTel1" value="#{PrincipalB.tel1}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		              			<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+		              		</p:inputText>
+							<p:message for="CTel1" />
+							
 							<p:outputLabel value="Telefono 2:" />
-					        <p:inputText value="#{PrincipalB.tel2}"/>
-					        <p:message for="CRaso" display="icon" />
+					        <p:inputText id="CTel2" value="#{PrincipalB.tel2}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+					        	<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+					        </p:inputText>
+					        <p:message for="CTel2" />
+					        
 					        <p:outputLabel value="E-Mail:" />
-					        <p:inputText value="#{PrincipalB.eml}"/>
-					        <p:message for="CRaso" display="icon" />				                				                
+					        <p:inputText id="CEml" value="#{PrincipalB.eml}" validatorMessage="Ingrese una direccion valida">
+					        	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					        </p:inputText>
+					        <p:message for="CEml"/>				                				                
 				        </p:panelGrid>
-				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg"/>
+				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
+				        <br/>
+				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg :TV:FC:PGCCli"/>
 			        </h:form>
  				</p:tab>
  			</p:tabView>
- 			<p:ajax update="@this" />
+ 			<p:ajax update="@this" resetValues="true"/> 	
  		</p:dialog>
 	</h:body>
 </html>
