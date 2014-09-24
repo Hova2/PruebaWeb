@@ -12,9 +12,11 @@
 		</f:facet>		
 		<p:tabView dynamic="true" cache="true">
         	<p:tab title="Clientes">
-            	<p:panelGrid columns="1">
+            	<p:panelGrid columns="2" styleClass="sinborde" columnClasses="centrado, centrado">
     				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
+    				<p:graphicImage value="listar.jpg" width="50px" height="50px"/>
     				<p:commandButton id="BCCliente" type="button" value="Cargar cliente" onclick="PF('PDVCCliente').show()" />
+    				<p:commandButton id="BLCliente" type="button" value="Listar clientes" onclick="PF('PDVLCliente').show()" />
  				</p:panelGrid>
    			</p:tab>
 	        <p:tab title="Articulos">
@@ -35,11 +37,11 @@
 		   	</p:tab>
     	</p:tabView>
     	
-    	<p:dialog id="PDCCliente" header="Cargar cliente" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
+    	<p:dialog id="PDCCliente" header="Cargar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
  			<p:tabView id="TV">
  				<p:tab id="T1" title="Cargar cliente">
  					<h:form id="FC">
-	 					<p:panelGrid id="PGCCli" columns="3" styleClass="sinborde">
+	 					<p:panelGrid id="PGCCli" columns="3" styleClass="sinborde sinbordetam">
 		        			<p:outputLabel value="(*) Nombre:" />
 					        <p:inputText id="CNom" value="#{PrincipalB.nom}" required="true" requiredMessage="Ingrese un nombre" validatorMessage="Debe tener al menos 2 caracteres ">
 						        <f:validateLength minimum="2" />								
@@ -100,7 +102,7 @@
  				</p:tab>
  				<p:tab id="T2" title="Cargar organizacion">
  					<h:form id="FO">
-	 					<p:panelGrid id="PGCOrg" columns="3" styleClass="sinborde">
+	 					<p:panelGrid id="PGCOrg" columns="3" styleClass="sinborde sinbordetam">
 		        			<p:outputLabel value="(*) Razon social:" />
 					        <p:inputText id="CRaso" value="#{PrincipalB.raso}" required="true" requiredMessage="Ingrese una razon social" validatorMessage="Debe tener al menos 2 caracteres">
 		        				<f:validateLength minimum="2" />
@@ -147,6 +149,34 @@
  				</p:tab>
  			</p:tabView>
  			<p:ajax update="@this" resetValues="true"/> 	
+ 		</p:dialog>
+ 		<p:dialog id="PDLCliente" header="Listar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVLCliente" modal="true" >
+ 			<h:form>
+ 				
+    			<p:dataTable id="DTLClis" var="Clis" value="#{PrincipalB.TCli()}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="15" style="margin-bottom:20px">
+    		   
+                	<p:column>
+            			<f:facet name="header">
+                			<h:outputText value="N° de Cliente" />
+            			</f:facet>
+            			<h:outputText value="#{Clis.idcliOrg}" />
+        			</p:column>
+        			<p:column>
+                		<f:facet name="header">
+                    		<h:outputText value="Nombre" />
+                		</f:facet>
+                		<h:outputText value="#{Clis.cliente.nom}" />
+            		</p:column>
+    			</p:dataTable>
+    			<h:commandLink>
+                	<p:graphicImage value="xls.png" width="40px" height="40px" />
+                	<p:dataExporter type="xls" target="DTLClis" fileName="Listado de clientes" />
+            	</h:commandLink>
+            	<h:commandLink>
+                	<p:graphicImage value="pdf.png" width="40px" height="40px" />
+                	<p:dataExporter type="pdf" target="DTLClis" fileName="Listado de clientes"/>
+                </h:commandLink>
+    		</h:form>
  		</p:dialog>
 	</h:body>
 </html>

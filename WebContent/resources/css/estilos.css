@@ -2,6 +2,12 @@
 	border: none !important;
 }
 
-.sinborde{
+.sinbordetam{
 	width: 100% !important; 
+}
+
+.centrado{
+	text-align: center !important;
+	margin-left: 50% !important; 
+	margin:0px auto !importantS; 
 }
