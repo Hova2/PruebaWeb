@@ -154,9 +154,16 @@ public class Principal implements Serializable{
 		this.ResetValues();
 	}
 	
-	public List TCli(){
+	public List LCli(){
 		SessionFactory Sesion = CreaSesion.getSessionFactory();
 		Session SAbierta = Sesion.openSession();
-		return SAbierta.createQuery("FROM ClienteOrganizacion").list();
+		return SAbierta.createQuery("FROM Cliente").list();
 	}
+	
+	public List LOrg(){
+		SessionFactory Sesion = CreaSesion.getSessionFactory();
+		Session SAbierta = Sesion.openSession();
+		
+		return SAbierta.createQuery("FROM Organizacion").list();
+	}	
 }

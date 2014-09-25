@@ -6,17 +6,19 @@
 	<h:head>
 		<title>Index WebApp PPP</title>
 	</h:head>
-	<h:body>
+	<h:body styleClass="sacarscroll">
 		<f:facet name="last">
 			<h:outputStylesheet library="css" name="estilos.css" />
 		</f:facet>		
 		<p:tabView dynamic="true" cache="true">
         	<p:tab title="Clientes">
-            	<p:panelGrid columns="2" styleClass="sinborde" columnClasses="centrado, centrado">
+            	<p:panelGrid columns="3" styleClass="sinborde" columnClasses="centrado, centrado, centrado">
     				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
     				<p:graphicImage value="listar.jpg" width="50px" height="50px"/>
-    				<p:commandButton id="BCCliente" type="button" value="Cargar cliente" onclick="PF('PDVCCliente').show()" />
+    				<p:graphicImage value="modificar.jpg" width="40px" height="40px"/>
+    				<p:commandButton id="BCCliente" type="button" value="Cargar clientes" onclick="PF('PDVCCliente').show()" />
     				<p:commandButton id="BLCliente" type="button" value="Listar clientes" onclick="PF('PDVLCliente').show()" />
+    				<p:commandButton id="BMCliente" type="button" value="Modificar clientes" onclick="PF('PDVCCliente').show()" />
  				</p:panelGrid>
    			</p:tab>
 	        <p:tab title="Articulos">
@@ -37,9 +39,9 @@
 		   	</p:tab>
     	</p:tabView>
     	
-    	<p:dialog id="PDCCliente" header="Cargar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" >
- 			<p:tabView id="TV">
- 				<p:tab id="T1" title="Cargar cliente">
+    	<p:dialog id="PDCCliente" header="Cargar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVCCliente" modal="true" styleClass="sacarscroll">
+ 			<p:tabView id="TV" dynamic="true">
+ 				<p:tab id="T1" title="Cliente">
  					<h:form id="FC">
 	 					<p:panelGrid id="PGCCli" columns="3" styleClass="sinborde sinbordetam">
 		        			<p:outputLabel value="(*) Nombre:" />
@@ -100,7 +102,7 @@
 				        <p:commandButton value="Guardar" action="#{PrincipalB.CCli}" update="PGCCli :TV:FO:PGCOrg"/>
  					</h:form>
  				</p:tab>
- 				<p:tab id="T2" title="Cargar organizacion">
+ 				<p:tab id="T2" title="Organizacion">
  					<h:form id="FO">
 	 					<p:panelGrid id="PGCOrg" columns="3" styleClass="sinborde sinbordetam">
 		        			<p:outputLabel value="(*) Razon social:" />
@@ -150,33 +152,133 @@
  			</p:tabView>
  			<p:ajax update="@this" resetValues="true"/> 	
  		</p:dialog>
- 		<p:dialog id="PDLCliente" header="Listar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVLCliente" modal="true" >
- 			<h:form>
- 				
-    			<p:dataTable id="DTLClis" var="Clis" value="#{PrincipalB.TCli()}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="15" style="margin-bottom:20px">
-    		   
-                	<p:column>
-            			<f:facet name="header">
-                			<h:outputText value="N° de Cliente" />
-            			</f:facet>
-            			<h:outputText value="#{Clis.idcliOrg}" />
-        			</p:column>
-        			<p:column>
-                		<f:facet name="header">
-                    		<h:outputText value="Nombre" />
-                		</f:facet>
-                		<h:outputText value="#{Clis.cliente.nom}" />
-            		</p:column>
-    			</p:dataTable>
-    			<h:commandLink>
-                	<p:graphicImage value="xls.png" width="40px" height="40px" />
-                	<p:dataExporter type="xls" target="DTLClis" fileName="Listado de clientes" />
-            	</h:commandLink>
-            	<h:commandLink>
-                	<p:graphicImage value="pdf.png" width="40px" height="40px" />
-                	<p:dataExporter type="pdf" target="DTLClis" fileName="Listado de clientes"/>
-                </h:commandLink>
-    		</h:form>
+ 		<p:dialog id="PDLCliente" header="Listar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVLCliente" modal="true" styleClass="sacarscroll">
+ 			<p:tabView dynamic="true" cache="true">
+ 				<p:tab title="Cliente">
+		 			<h:form>		 				
+		    			<p:dataTable id="DTLClis" var="Clis" value="#{PrincipalB.LCli()}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="15" style="margin-bottom:20px">		    		   
+		                	<p:column>
+		            			<f:facet name="header">
+		                			<h:outputText value="N° de Cliente" />
+		            			</f:facet>
+		            			<h:outputText value="#{Clis.idcli}" />
+		        			</p:column>
+		        			<p:column>
+		                		<f:facet name="header">
+		                    		<h:outputText value="Nombre" />
+		                		</f:facet>
+		                		<h:outputText value="#{Clis.nom}" />
+		            		</p:column>
+		            		<p:column>
+		                		<f:facet name="header">
+		                    		<h:outputText value="Apellido" />
+		                		</f:facet>
+		                		<h:outputText value="#{Clis.ape}" />
+		            		</p:column>
+		            		<p:column>
+		                		<f:facet name="header">
+		                    		<h:outputText value="DNI" />
+		                		</f:facet>
+		                		<h:outputText value="#{Clis.dni}" />
+		            		</p:column>
+		            		<p:column>
+		                		<f:facet name="header">
+		                    		<h:outputText value="Cuit" />
+		                		</f:facet>
+		                		<h:outputText value="#{Clis.clienteOrganizacion.cuit}" />
+		            		</p:column>
+		            		<p:column>
+		                		<f:facet name="header">
+		                    		<h:outputText value="Direccion" />
+		                		</f:facet>
+		                		<h:outputText value="#{Clis.clienteOrganizacion.dir}" />
+		            		</p:column>
+		            		<p:column>
+		                		<f:facet name="header">
+		                    		<h:outputText value="Telefono 1" />
+		                		</f:facet>
+		                		<h:outputText value="#{Clis.clienteOrganizacion.tel1}" />
+		            		</p:column>
+		        			<p:column>
+		                		<f:facet name="header">
+		                    		<h:outputText value="Telefono 2" />
+		                		</f:facet>
+		                		<h:outputText value="#{Clis.clienteOrganizacion.tel2}" />
+		            		</p:column>
+		        			<p:column>
+		                		<f:facet name="header">
+		                    		<h:outputText value="E-Mail" />
+		                		</f:facet>
+		                		<h:outputText value="#{Clis.clienteOrganizacion.eml}" />
+		            		</p:column>
+		    			</p:dataTable>		    			
+		    			<h:commandLink>
+		                	<p:graphicImage value="xls.png" width="40px" height="40px" />
+		                	<p:dataExporter type="xls" target="DTLClis" fileName="Listado de clientes" />
+		            	</h:commandLink>
+		            	<h:commandLink>
+		                	<p:graphicImage value="pdf.png" width="40px" height="40px" />
+		                	<p:dataExporter type="pdf" target="DTLClis" fileName="Listado de clientes"/>
+		                </h:commandLink>
+		    		</h:form>
+		    	</p:tab>
+		    	<p:tab title="Organizacion">
+		    		<h:form>
+			    		<p:dataTable id="DTLOrgs" var="Orgs" value="#{PrincipalB.LOrg()}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="15" style="margin-bottom:20px">		    		   
+			            	<p:column>
+			            		<f:facet name="header">
+			                		<h:outputText value="N° de Cliente" />
+			            		</f:facet>
+			            		<h:outputText value="#{Orgs.idorg}" />
+			        		</p:column>
+			        		<p:column>
+                				<f:facet name="header">
+                    				<h:outputText value="Razon Social" />
+                				</f:facet>
+                				<h:outputText value="#{Orgs.raso}" />
+            				</p:column>
+			            	<p:column>
+			                	<f:facet name="header">
+			                    	<h:outputText value="Cuit" />
+			                	</f:facet>
+			                	<h:outputText value="#{Orgs.clienteOrganizacion.cuit}" />
+			            	</p:column>
+			            	<p:column>
+			                	<f:facet name="header">
+			                    	<h:outputText value="Direccion" />
+			                	</f:facet>
+			                	<h:outputText value="#{Orgs.clienteOrganizacion.dir}" />
+			            	</p:column>
+			            	<p:column>
+			                	<f:facet name="header">
+			                    	<h:outputText value="Telefono 1" />
+			                	</f:facet>
+			                	<h:outputText value="#{Orgs.clienteOrganizacion.tel1}" />
+			            	</p:column>
+			        		<p:column>
+			                	<f:facet name="header">
+			                    	<h:outputText value="Telefono 2" />
+			                	</f:facet>
+			                	<h:outputText value="#{Orgs.clienteOrganizacion.tel2}" />
+			            	</p:column>
+			        		<p:column>
+			                	<f:facet name="header">
+			                    	<h:outputText value="E-Mail" />
+			                	</f:facet>
+			                	<h:outputText value="#{Orgs.clienteOrganizacion.eml}" />
+			            	</p:column>
+			    		</p:dataTable>
+			    		<h:commandLink>
+			               	<p:graphicImage value="xls.png" width="40px" height="40px" />
+			               	<p:dataExporter type="xls" target="DTLOrgs" fileName="Listado de clientes"/>
+			            </h:commandLink>
+			            <h:commandLink>
+			               	<p:graphicImage value="pdf.png" width="40px" height="40px" />
+			               	<p:dataExporter type="pdf" target="DTLOrgs" fileName="Listado de clientes"/>
+			            </h:commandLink>
+		    		</h:form>		
+		    	</p:tab>
+	    	</p:tabView>
  		</p:dialog>
 	</h:body>
 </html>
