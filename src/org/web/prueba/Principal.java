@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.FlowEvent;
 
 public class Principal implements Serializable{
 
@@ -17,7 +18,9 @@ public class Principal implements Serializable{
 	private String nom;
 	private String ape;
 	private Integer dni;
-	private String raso;	
+	private String raso;
+	private Integer idcli;
+	private Integer idorg;
 				
 	public  Long getCuit(){
 		return this.cuit;
@@ -25,6 +28,22 @@ public class Principal implements Serializable{
 	
 	public void setCuit(Long cuit){
 		this.cuit = cuit;
+	}
+	
+	public Integer getIdcli(){
+		return this.idcli;
+	}
+	
+	public void setIdcli(Integer idcli){
+		this.idcli = idcli;
+	}
+	
+	public Integer getIdorg(){
+		return this.idorg;
+	}
+	
+	public void setIdorg(Integer idorg){
+		this.idorg = idorg;
 	}
 	
 	public Integer getTel1(){
@@ -103,7 +122,6 @@ public class Principal implements Serializable{
 		this.setRaso(null);
 	}
 	
-	
 	public void CCli(){
 		SessionFactory sesion = CreaSesion.getSessionFactory();
 		Session sabierta = sesion.openSession();
@@ -163,7 +181,24 @@ public class Principal implements Serializable{
 	public List LOrg(){
 		SessionFactory Sesion = CreaSesion.getSessionFactory();
 		Session SAbierta = Sesion.openSession();
-		
 		return SAbierta.createQuery("FROM Organizacion").list();
-	}	
+	}
+	
+	public String MCUO(FlowEvent evento){
+		if (getIdcli() != null){
+			SessionFactory Sesion = CreaSesion.getSessionFactory();
+			Session SAbierta = Sesion.openSession();
+			String query = ("from Cliente where idcli="+"'"+this.getIdcli().toString()+"'");
+			Cliente mcli = (Cliente)SAbierta.createQuery(query).uniqueResult();
+			this.setApe(mcli.getApe());
+			this.setNom(mcli.getNom());
+			this.setDni(mcli.getDni());
+			this.setCuit(mcli.getClienteOrganizacion().getCuit());
+			this.setTel1(mcli.getClienteOrganizacion().getTel1());
+			this.setTel2(mcli.getClienteOrganizacion().getTel2());
+			this.setDir(mcli.getClienteOrganizacion().getDir());
+			this.setEml(mcli.getClienteOrganizacion().getEml());
+		}
+		return evento.getNewStep();
+	}
 }

@@ -18,7 +18,7 @@
     				<p:graphicImage value="modificar.jpg" width="40px" height="40px"/>
     				<p:commandButton id="BCCliente" type="button" value="Cargar clientes" onclick="PF('PDVCCliente').show()" />
     				<p:commandButton id="BLCliente" type="button" value="Listar clientes" onclick="PF('PDVLCliente').show()" />
-    				<p:commandButton id="BMCliente" type="button" value="Modificar clientes" onclick="PF('PDVCCliente').show()" />
+    				<p:commandButton id="BMCliente" type="button" value="Modificar clientes" onclick="PF('PDVMCliente').show()" />
  				</p:panelGrid>
    			</p:tab>
 	        <p:tab title="Articulos">
@@ -152,6 +152,7 @@
  			</p:tabView>
  			<p:ajax update="@this" resetValues="true"/> 	
  		</p:dialog>
+ 		
  		<p:dialog id="PDLCliente" header="Listar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVLCliente" modal="true" styleClass="sacarscroll">
  			<p:tabView dynamic="true" cache="true">
  				<p:tab title="Cliente">
@@ -279,6 +280,58 @@
 		    		</h:form>		
 		    	</p:tab>
 	    	</p:tabView>
+ 		</p:dialog>
+ 		<p:dialog id="PDMCliente" header="Modificar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVMCliente" modal="true" styleClass="sacarscroll">
+ 			<p:tabView dynamic="true" cache="true">
+ 				<p:tab title="Cliente">
+ 					<h:form>
+						<p:wizard flowListener="#{PrincipalB.MCUO}">
+	 						<p:tab title="Buscar">
+	 							<p:panelGrid columns="2">
+	 								<p:outputLabel value="N° de cliente" />
+	 								<p:inputText value="#{PrincipalB.idcli}" />
+										 						
+	 								
+	 							</p:panelGrid>
+	 							
+	 						</p:tab>
+	 						<p:tab title="Modificar">
+	 							<p:panelGrid columns="2">
+	 										 						
+	 								
+	 							
+	 							<p:inputText value="#{PrincipalB.nom}" />
+	 							<p:inputText value="#{PrincipalB.ape}" />
+	 							<p:inputText value="#{PrincipalB.dni}" />
+	 							<p:inputText value="#{PrincipalB.cuit}" />
+	 							<p:inputText value="#{PrincipalB.dir}" />
+	 							<p:inputText value="#{PrincipalB.tel1}" />
+	 							<p:inputText value="#{PrincipalB.tel2}" />
+	 							<p:inputText value="#{PrincipalB.eml}" />
+	 							</p:panelGrid>
+	 						</p:tab>
+	 						<p:tab title="Confirmar">
+	 							
+	 						</p:tab>
+	 					</p:wizard>
+ 					</h:form>
+ 				</p:tab>
+ 				<p:tab title="Organizacion">
+ 				<h:form>
+						<p:wizard>
+	 						<p:tab title="Buscar">
+	 							
+	 						</p:tab>
+	 						<p:tab title="Modificar">
+	 							
+	 						</p:tab>
+	 						<p:tab title="Confirmar">
+	 							
+	 						</p:tab>
+	 					</p:wizard>
+ 					</h:form>
+ 				</p:tab>
+ 			</p:tabView>
  		</p:dialog>
 	</h:body>
 </html>
