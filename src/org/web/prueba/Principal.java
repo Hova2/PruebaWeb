@@ -111,6 +111,8 @@ public class Principal implements Serializable{
 	}
 	
 	public void ResetValues(){
+		this.setIdcli(null);
+		this.setIdorg(null);
 		this.setNom(null);
 		this.setApe(null);
 		this.setDni(null);
@@ -125,51 +127,89 @@ public class Principal implements Serializable{
 	public void CCli(){
 		SessionFactory sesion = CreaSesion.getSessionFactory();
 		Session sabierta = sesion.openSession();
-		
 		ClienteOrganizacion co = new ClienteOrganizacion();
 		Cliente cli = new Cliente();
 		
-		co.setCuit(this.getCuit());
-		co.setDir(this.getDir());
-		co.setTel1(this.getTel1());
-		co.setTel2(this.getTel2());
-		co.setEml(this.getEml());
-		co.setCliente(cli);
-		cli.setApe(this.getApe());
-		cli.setNom(this.getNom());
-		cli.setDni(this.getDni());
-		cli.setClienteOrganizacion(co);
-		sabierta.beginTransaction();
-		sabierta.save(co);
-		cli.setIdcli(co.getIdcliOrg());
-		sabierta.save(cli);
-		sabierta.getTransaction().commit();
-		this.ResetValues();
+		if (this.idcli == null){
+			co.setCuit(this.getCuit());
+			co.setDir(this.getDir());
+			co.setTel1(this.getTel1());
+			co.setTel2(this.getTel2());
+			co.setEml(this.getEml());
+			co.setCliente(cli);
+			cli.setApe(this.getApe());
+			cli.setNom(this.getNom());
+			cli.setDni(this.getDni());
+			cli.setClienteOrganizacion(co);
+			sabierta.beginTransaction();
+			sabierta.save(co);
+			cli.setIdcli(co.getIdcliOrg());
+			sabierta.save(cli);
+			sabierta.getTransaction().commit();
+			this.ResetValues();
+		}
+		else{
+			co.setIdcliOrg(this.idcli);
+			co.setCuit(this.getCuit());
+			co.setDir(this.getDir());
+			co.setTel1(this.getTel1());
+			co.setTel2(this.getTel2());
+			co.setEml(this.getEml());
+			co.setCliente(cli);
+			cli.setIdcli(this.idcli);
+			cli.setApe(this.getApe());
+			cli.setNom(this.getNom());
+			cli.setDni(this.getDni());
+			cli.setClienteOrganizacion(co);
+			sabierta.beginTransaction();
+			sabierta.update(co);;
+			sabierta.update(cli);
+			sabierta.getTransaction().commit();
+			this.ResetValues();
+		}
 		}
 	
 	public void COrg(){
 		SessionFactory sesion = CreaSesion.getSessionFactory();
 		Session sabierta = sesion.openSession();
-		
 		ClienteOrganizacion co = new ClienteOrganizacion();	
 		Organizacion org = new Organizacion();
 		
-		co.setCuit(this.getCuit());
-		co.setDir(this.getDir());
-		co.setTel1(this.getTel1());
-		co.setTel2(this.getTel2());
-		co.setEml(this.getEml());
-		co.setOrganizacion(org);
-		org.setRaso(this.getRaso());
-		org.setClienteOrganizacion(co);
-		sabierta.beginTransaction();
-		sabierta.save(co);
-		org.setIdorg(co.getIdcliOrg());
-		sabierta.save(org);
-		sabierta.getTransaction().commit();
-		sabierta.close();
-		sesion.close();
-		this.ResetValues();
+		if (this.idorg == null){
+			co.setCuit(this.getCuit());
+			co.setDir(this.getDir());
+			co.setTel1(this.getTel1());
+			co.setTel2(this.getTel2());
+			co.setEml(this.getEml());
+			co.setOrganizacion(org);
+			org.setRaso(this.getRaso());
+			org.setClienteOrganizacion(co);
+			sabierta.beginTransaction();
+			sabierta.save(co);
+			org.setIdorg(co.getIdcliOrg());
+			sabierta.save(org);
+			sabierta.getTransaction().commit();
+			sabierta.close();
+			sesion.close();
+			this.ResetValues();
+		}
+		else{
+			co.setIdcliOrg(this.idorg);
+			co.setCuit(this.getCuit());
+			co.setDir(this.getDir());
+			co.setTel1(this.getTel1());
+			co.setTel2(this.getTel2());
+			co.setEml(this.getEml());
+			co.setOrganizacion(org);
+			org.setIdorg(this.idorg);
+			org.setRaso(this.raso);
+			org.setClienteOrganizacion(co);
+			sabierta.beginTransaction();
+			sabierta.update(co);;
+			sabierta.update(org);
+			sabierta.getTransaction().commit();
+			this.ResetValues();
+		}
 	}
 	
 	public List LCli(){
@@ -184,21 +224,31 @@ public class Principal implements Serializable{
 		return SAbierta.createQuery("FROM Organizacion").list();
 	}
 	
-	public String MCUO(FlowEvent evento){
-		if (getIdcli() != null){
-			SessionFactory Sesion = CreaSesion.getSessionFactory();
-			Session SAbierta = Sesion.openSession();
-			String query = ("from Cliente where idcli="+"'"+this.getIdcli().toString()+"'");
-			Cliente mcli = (Cliente)SAbierta.createQuery(query).uniqueResult();
-			this.setApe(mcli.getApe());
-			this.setNom(mcli.getNom());
-			this.setDni(mcli.getDni());
-			this.setCuit(mcli.getClienteOrganizacion().getCuit());
-			this.setTel1(mcli.getClienteOrganizacion().getTel1());
-			this.setTel2(mcli.getClienteOrganizacion().getTel2());
-			this.setDir(mcli.getClienteOrganizacion().getDir());
-			this.setEml(mcli.getClienteOrganizacion().getEml());
-		}
-		return evento.getNewStep();
+	public void BCli(){
+		SessionFactory Sesion = CreaSesion.getSessionFactory();
+		Session SAbierta = Sesion.openSession();
+		String query = ("from Cliente where idcli="+"'"+this.getIdcli().toString()+"'");
+		Cliente mcli = (Cliente)SAbierta.createQuery(query).uniqueResult();
+		this.setApe(mcli.getApe());
+		this.setNom(mcli.getNom());
+		this.setDni(mcli.getDni());
+		this.setCuit(mcli.getClienteOrganizacion().getCuit());
+		this.setTel1(mcli.getClienteOrganizacion().getTel1());
+		this.setTel2(mcli.getClienteOrganizacion().getTel2());
+		this.setDir(mcli.getClienteOrganizacion().getDir());
+		this.setEml(mcli.getClienteOrganizacion().getEml());	
+	}
+	
+	public void BOrg(){
+		SessionFactory Sesion = CreaSesion.getSessionFactory();
+		Session SAbierta = Sesion.openSession();
+		String query = ("from Organizacion where idorg="+"'"+this.getIdorg().toString()+"'");
+		Organizacion morg = (Organizacion)SAbierta.createQuery(query).uniqueResult();
+		this.setRaso(morg.getRaso());
+		this.setCuit(morg.getClienteOrganizacion().getCuit());
+		this.setTel1(morg.getClienteOrganizacion().getTel1());
+		this.setTel2(morg.getClienteOrganizacion().getTel2());
+		this.setDir(morg.getClienteOrganizacion().getDir());
+		this.setEml(morg.getClienteOrganizacion().getEml());	
 	}
 }

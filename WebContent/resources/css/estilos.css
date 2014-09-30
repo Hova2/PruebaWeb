@@ -15,3 +15,7 @@
 .sacarscroll{
   overflow: hidden !important;
 }
+
+.ui-wizard-nav-back{
+	display: none !important;
+}
