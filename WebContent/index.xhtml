@@ -14,13 +14,15 @@
 			
 		<p:tabView dynamic="true" cache="true">
         	<p:tab title="Clientes">
-            	<p:panelGrid columns="3" styleClass="sinborde" columnClasses="centrado, centrado, centrado">
+            	<p:panelGrid columns="4" styleClass="sinborde" columnClasses="centrado, centrado, centrado, centrado">
     				<p:graphicImage value="plus.jpg" width="40px" height="40px"/>
     				<p:graphicImage value="listar.jpg" width="50px" height="50px"/>
     				<p:graphicImage value="modificar.jpg" width="40px" height="40px"/>
+    				<p:graphicImage value="delete.jpg" width="40px" height="40px"/>
     				<p:commandButton id="BCCliente" type="button" value="Cargar clientes" onclick="PF('PDVCCliente').show()" />
     				<p:commandButton id="BLCliente" type="button" value="Listar clientes" onclick="PF('PDVLCliente').show()" />
     				<p:commandButton id="BMCliente" type="button" value="Modificar clientes" onclick="PF('PDVMCliente').show()" />
+    				<p:commandButton id="BECliente" type="button" value="Eliminar clientes" onclick="PF('PDVECliente').show()" />
  				</p:panelGrid>
    			</p:tab>
 	        <p:tab title="Articulos">
@@ -101,7 +103,7 @@
 				        </p:panelGrid>
 				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
 				        <br/>
-				        <p:commandButton value="Guardar" action="#{PrincipalB.CCli}" update="PGCCli :TV:FO:PGCOrg"/>
+				        <p:commandButton value="Guardar" action="#{PrincipalB.CCli}" update="PGCCli :TV:FO:PGCOrg :PDLCliente"/>
  					</h:form>
  				</p:tab>
  				<p:tab id="T2" title="Organizacion">
@@ -148,7 +150,7 @@
 				        </p:panelGrid>
 				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
 				        <br/>
-				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg :TV:FC:PGCCli"/>
+				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg :TV:FC:PGCCli :PDLCliente"/>
 			        </h:form>
  				</p:tab>
  			</p:tabView>
@@ -290,19 +292,19 @@
  					<h:form id="FC">
 	 					<p:panelGrid id="PGCCli" columns="3" styleClass="sinborde sinbordetam">
 		        			<p:outputLabel value="Nombre:" />
-					        <p:inputText id="CNom" value="#{PrincipalB.nom}" requiredMessage="Ingrese un nombre" validatorMessage="Debe tener al menos 2 caracteres ">
+					        <p:inputText id="CNom" value="#{PrincipalB.nom}" validatorMessage="Debe tener al menos 2 caracteres ">
 						        <f:validateLength minimum="2" />								
 					        </p:inputText>
 					        <p:message for="CNom" />
 					     		
 					     	<p:outputLabel value="Apellido:" />
-					        <p:inputText id="CApe" value="#{PrincipalB.ape}" requiredMessage="Ingrese un apellido" validatorMessage="Debe tener al menos 2 caracteres ">
+					        <p:inputText id="CApe" value="#{PrincipalB.ape}" validatorMessage="Debe tener al menos 2 caracteres ">
 					        	<f:validateLength minimum="2" />
 					        </p:inputText>
 					        <p:message for="CApe" />
 					        
 					        <p:outputLabel value="D.N.I:" />
-					        <p:inputText id="CDNI" value="#{PrincipalB.dni}" requiredMessage="Ingrese un D.N.I" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s" >
+					        <p:inputText id="CDNI" value="#{PrincipalB.dni}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s" >
 		        				<f:validateLength minimum="2" />
 		        				<f:validateLongRange minimum="1" />  			
 		        			</p:inputText>
@@ -343,7 +345,7 @@
 					        <p:message for="CEml"/>					                				                
 				        </p:panelGrid>
 				        <br/>
-				        <p:outputLabel value="N° de cliente:" />
+				        <p:outputLabel value="N° de cliente: " />
 					        <p:inputText id="MNCli" value="#{PrincipalB.idcli}"/>					        					
 					        <p:message for="MNCli"/>
 				        <br/>
@@ -354,11 +356,81 @@
  				<p:tab id="T2" title="Organizacion">
  					<h:form id="FO">
 	 					<p:panelGrid id="PGCOrg" columns="3" styleClass="sinborde sinbordetam">
-		        			<p:outputLabel value="(*) Razon social:" />
-					        <p:inputText id="CRaso" value="#{PrincipalB.raso}" requiredMessage="Ingrese una razon social" validatorMessage="Debe tener al menos 2 caracteres">
+		        			<p:outputLabel value="Razon social:" />
+					        <p:inputText id="CRaso" value="#{PrincipalB.raso}" validatorMessage="Debe tener al menos 2 caracteres">
 		        				<f:validateLength minimum="2" />
 					        </p:inputText>
 		        			<p:message for="CRaso" />
+		        			
+		        			<p:outputLabel value="CUIT:" />
+		               		<p:inputText id="CCUIT" value="#{PrincipalB.cuit}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		               			<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+		               		</p:inputText>
+					        <p:message for="CCUIT" />					        
+					 		
+					        <p:outputLabel value="Direccion:"  />
+					        <p:inputText id="CDir" value="#{PrincipalB.dir}" validatorMessage="Debe tener al menos 2 caracteres">
+					        	<f:validateLength minimum="2" />
+					        </p:inputText>
+					        <p:message for="CDir" />					        
+					        
+					        <p:outputLabel value="Telefono 1:" />
+		              		<p:inputText id="CTel1" value="#{PrincipalB.tel1}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		              			<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+		              		</p:inputText>
+							<p:message for="CTel1" />
+							
+							<p:outputLabel value="Telefono 2:" />
+					        <p:inputText id="CTel2" value="#{PrincipalB.tel2}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+					        	<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+					        </p:inputText>
+					        <p:message for="CTel2" />
+					        
+					        <p:outputLabel value="E-Mail:" />
+					        <p:inputText id="CEml" value="#{PrincipalB.eml}" validatorMessage="Ingrese una direccion valida">
+					        	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					        </p:inputText>
+					        <p:message for="CEml"/>				                				                
+				        </p:panelGrid>
+				        <br/>
+				        <p:outputLabel value="N° de organizacion: " />
+					        <p:inputText id="MNOrg" value="#{PrincipalB.idorg}"/>					        					
+					        <p:message for="MNOrg"/>
+				        <br/>
+				        <p:commandButton value="Buscar" action="#{PrincipalB.BOrg}" update="PGCOrg :TV:FC:PGCCli"/>
+				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg :TV:FC:PGCCli :PDLCliente"/>
+			        </h:form>
+ 				</p:tab>
+ 			</p:tabView>
+ 			<p:ajax update="@this" resetValues="true"/>
+ 		</p:dialog>
+ 		<p:dialog id="PDECliente" header="Eliminar cliente u organizacion" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="PDVECliente" modal="true" dynamic="true" styleClass="sacarscroll">
+ 			<p:tabView dynamic="true">
+ 				<p:tab id="T1" title="Cliente">
+ 					<h:form id="FC">
+	 					<p:panelGrid id="PGCCli" columns="3" styleClass="sinborde sinbordetam">
+		        			<p:outputLabel value="Nombre:" />
+					        <p:inputText id="CNom" value="#{PrincipalB.nom}" validatorMessage="Debe tener al menos 2 caracteres ">
+						        <f:validateLength minimum="2" />								
+					        </p:inputText>
+					        <p:message for="CNom" />
+					     		
+					     	<p:outputLabel value="Apellido:" />
+					        <p:inputText id="CApe" value="#{PrincipalB.ape}" validatorMessage="Debe tener al menos 2 caracteres ">
+					        	<f:validateLength minimum="2" />
+					        </p:inputText>
+					        <p:message for="CApe" />
+					        
+					        <p:outputLabel value="D.N.I:" />
+					        <p:inputText id="CDNI" value="#{PrincipalB.dni}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s" >
+		        				<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />  			
+		        			</p:inputText>
+		        			<p:message for="CDNI" />
+		        			
 		        			<p:outputLabel value="CUIT:" />
 		               		<p:inputText id="CCUIT" value="#{PrincipalB.cuit}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
 		               			<f:validateLength minimum="2" />
@@ -391,20 +463,70 @@
 					        <p:inputText id="CEml" value="#{PrincipalB.eml}" validatorMessage="Ingrese una direccion valida">
 					        	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					        </p:inputText>
+					        <p:message for="CEml"/>					                				                
+				        </p:panelGrid>
+				        <br/>
+				        <p:outputLabel value="N° de cliente: " />
+					        <p:inputText id="MNCli" value="#{PrincipalB.idcli}"/>					        					
+					        <p:message for="MNCli"/>
+				        <br/>
+				        <p:commandButton value="Buscar" action="#{PrincipalB.BCli}" update="PGCCli :TV:FO:PGCOrg"/>				        	
+				        <p:commandButton value="Eliminar" action="#{PrincipalB.ECli}" update="PGCCli :TV:FO:PGCOrg :PDLCliente"/>
+ 					</h:form>
+ 				</p:tab>
+ 				<p:tab id="T2" title="Organizacion">
+ 					<h:form id="FO">
+	 					<p:panelGrid id="PGCOrg" columns="3" styleClass="sinborde sinbordetam">
+		        			<p:outputLabel value="Razon social:" />
+					        <p:inputText id="CRaso" value="#{PrincipalB.raso}" validatorMessage="Debe tener al menos 2 caracteres">
+		        				<f:validateLength minimum="2" />
+					        </p:inputText>
+		        			<p:message for="CRaso" />
+		        			
+		        			<p:outputLabel value="CUIT:" />
+		               		<p:inputText id="CCUIT" value="#{PrincipalB.cuit}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		               			<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+		               		</p:inputText>
+					        <p:message for="CCUIT" />					        
+					 		
+					        <p:outputLabel value="Direccion:"  />
+					        <p:inputText id="CDir" value="#{PrincipalB.dir}" validatorMessage="Debe tener al menos 2 caracteres">
+					        	<f:validateLength minimum="2" />
+					        </p:inputText>
+					        <p:message for="CDir" />					        
+					        
+					        <p:outputLabel value="Telefono 1:" />
+		              		<p:inputText id="CTel1" value="#{PrincipalB.tel1}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		              			<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+		              		</p:inputText>
+							<p:message for="CTel1" />
+							
+							<p:outputLabel value="Telefono 2:" />
+					        <p:inputText id="CTel2" value="#{PrincipalB.tel2}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+					        	<f:validateLength minimum="2" />
+		        				<f:validateLongRange minimum="1" />
+					        </p:inputText>
+					        <p:message for="CTel2" />
+					        
+					        <p:outputLabel value="E-Mail:" />
+					        <p:inputText id="CEml" value="#{PrincipalB.eml}" validatorMessage="Ingrese una direccion valida">
+					        	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					        </p:inputText>
 					        <p:message for="CEml"/>				                				                
 				        </p:panelGrid>
 				        <br/>
-				        <p:outputLabel value="N° de organizacion" />
+				        <p:outputLabel value="N° de organizacion: " />
 					        <p:inputText id="MNOrg" value="#{PrincipalB.idorg}"/>					        					
 					        <p:message for="MNOrg"/>
 				        <br/>
 				        <p:commandButton value="Buscar" action="#{PrincipalB.BOrg}" update="PGCOrg :TV:FC:PGCCli"/>
-				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg :TV:FC:PGCCli :PDLCliente"/>
+				        <p:commandButton value="Eliminar" action="#{PrincipalB.ECli}" update="PGCOrg :TV:FC:PGCCli :PDLCliente"/>
 			        </h:form>
  				</p:tab>
  			</p:tabView>
  			<p:ajax update="@this" resetValues="true"/>
- 			
  		</p:dialog>
 	</h:body>
 </html>

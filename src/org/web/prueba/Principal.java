@@ -251,4 +251,31 @@ public class Principal implements Serializable{
 		this.setDir(morg.getClienteOrganizacion().getDir());
 		this.setEml(morg.getClienteOrganizacion().getEml());	
 	}
+	
+	public void ECli(){
+		SessionFactory sesion = CreaSesion.getSessionFactory();
+		Session sabierta = sesion.openSession();
+		ClienteOrganizacion co = new ClienteOrganizacion();
+		
+		if (this.idcli != null){
+			Cliente cli = new Cliente();
+			co.setIdcliOrg(this.idcli);
+			cli.setIdcli(this.idcli);
+			sabierta.beginTransaction();
+			sabierta.delete(cli);
+			sabierta.delete(co);
+			sabierta.getTransaction().commit();
+			this.ResetValues();
+		}
+		else{
+			Organizacion org = new Organizacion();
+			co.setIdcliOrg(this.idorg);
+			org.setIdorg(this.idorg);
+			sabierta.beginTransaction();
+			sabierta.delete(org);
+			sabierta.delete(co);
+			sabierta.getTransaction().commit();
+			this.ResetValues();
+		}		
+	}
 }
