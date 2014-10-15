@@ -7,7 +7,7 @@
 		<title>Index WebApp PPP</title>
 			
 	</h:head>
-	<h:body styleClass="sacarscroll">
+	<h:body styleClass="sacarscroll tamtipletra">
 		<f:facet name="last">
 			<h:outputStylesheet library="css" name="estilos.css" />
 		</f:facet>
@@ -104,6 +104,8 @@
 				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
 				        <br/>
 				        <p:commandButton value="Guardar" action="#{PrincipalB.CCli}" update="PGCCli :TV:FO:PGCOrg :PDLCliente"/>
+				        <p:commandButton value="Limpiar" update="PGCCli :TV:FO:PGCOrg :PDLCliente" resetValues="true" immediate="true"/>
+				        
  					</h:form>
  				</p:tab>
  				<p:tab id="T2" title="Organizacion">
@@ -151,6 +153,7 @@
 				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
 				        <br/>
 				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg :TV:FC:PGCCli :PDLCliente"/>
+				        <p:commandButton value="Limpiar" update="PGCOrg :TV:FC:PGCCli :PDLCliente" resetValues="true" immediate="true"/>
 			        </h:form>
  				</p:tab>
  			</p:tabView>
@@ -351,6 +354,7 @@
 				        <br/>
 				        <p:commandButton value="Buscar" action="#{PrincipalB.BCli}" update="PGCCli :TV:FO:PGCOrg"/>				        	
 				        <p:commandButton value="Guardar" action="#{PrincipalB.CCli}" update="PGCCli :TV:FO:PGCOrg :PDLCliente"/>
+				        <p:commandButton value="Limpiar" update="PGCCli :TV:FO:PGCOrg :PDLCliente" resetValues="true" immediate="true"/>
  					</h:form>
  				</p:tab>
  				<p:tab id="T2" title="Organizacion">
@@ -402,6 +406,7 @@
 				        <br/>
 				        <p:commandButton value="Buscar" action="#{PrincipalB.BOrg}" update="PGCOrg :TV:FC:PGCCli"/>
 				        <p:commandButton value="Guardar" action="#{PrincipalB.COrg}" update="PGCOrg :TV:FC:PGCCli :PDLCliente"/>
+				        <p:commandButton value="Limpiar" update="PGCOrg :TV:FC:PGCCli :PDLCliente" resetValues="true" immediate="true"/>
 			        </h:form>
  				</p:tab>
  			</p:tabView>
@@ -471,7 +476,8 @@
 					        <p:message for="MNCli"/>
 				        <br/>
 				        <p:commandButton value="Buscar" action="#{PrincipalB.BCli}" update="PGCCli :TV:FO:PGCOrg"/>				        	
-				        <p:commandButton value="Eliminar" action="#{PrincipalB.ECli}" update="PGCCli :TV:FO:PGCOrg :PDLCliente"/>
+				        <p:commandButton value="Eliminar" action="#{PrincipalB.ECli}" update="PGCCli :TV:FO:PGCOrg :PDLCliente" resetValues="true" immediate="true"/>
+				        <p:commandButton value="Limpiar" update="PGCCli :TV:FO:PGCOrg :PDLCliente" resetValues="true" immediate="true"/>
  					</h:form>
  				</p:tab>
  				<p:tab id="T2" title="Organizacion">
@@ -522,7 +528,8 @@
 					        <p:message for="MNOrg"/>
 				        <br/>
 				        <p:commandButton value="Buscar" action="#{PrincipalB.BOrg}" update="PGCOrg :TV:FC:PGCCli"/>
-				        <p:commandButton value="Eliminar" action="#{PrincipalB.ECli}" update="PGCOrg :TV:FC:PGCCli :PDLCliente"/>
+				        <p:commandButton value="Eliminar" action="#{PrincipalB.ECli}" update="PGCOrg :TV:FC:PGCCli :PDLCliente" resetValues="true" immediate="true"/>
+				        <p:commandButton value="Limpiar" update="PGCOrg :TV:FC:PGCCli :PDLCliente" resetValues="true" immediate="true"/>
 			        </h:form>
  				</p:tab>
  			</p:tabView>

@@ -8,7 +8,7 @@
 	<managed-bean>
         <managed-bean-name>PrincipalB</managed-bean-name>
         <managed-bean-class>org.web.prueba.Principal</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
  
     <navigation-rule>
