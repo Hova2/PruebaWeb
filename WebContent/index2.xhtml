@@ -7,58 +7,7 @@
 		<title>Index WebApp PPP</title>
 	</h:head>
 	<h:body>		
-		<h:form>
-		<p:selectOneRadio id="sotorgocli" value="#{PrincipalB.orgocli}" required="true" requiredMessage="Seleccione" >
-			<f:selectItem itemLabel="Organizacion" itemValue="Org" />
-			<f:selectItem itemLabel="Cliente" itemValue="Cli" />
-			<p:ajax event="change" update=":form2" process="@this" />
-			<p:commandButton value="Guardar" action="#{PrincipalB.SCli}" />
-		</p:selectOneRadio>
 		
-		</h:form>
-		
-		<h:form id="form2">
-			<p:outputLabel value="#{PrincipalB.orgocli}" />
-			<p:inputText rendered="#{PrincipalB.orgocli == 'Org'}" value="#{PrincipalB.raso}" />
-			<p:inputText rendered="#{PrincipalB.orgocli == 'Cli'}" value="#{PrincipalB.nom}" />
-			<p:inputText rendered="#{PrincipalB.orgocli == 'Cli'}" value="#{PrincipalB.ape}" />
-			
-		</h:form>
-		
-		
-		
-		<h:form id="FOrgocli">
- 						
- 						<p:panelGrid id="PGOrgocli" columns="2">
-	        					<p:outputLabel value="Nombre:" rendered="#{PrincipalB.orgocli == 'Cli'}"/>
-				                <p:inputText value="#{PrincipalB.nom}" rendered="#{PrincipalB.orgocli == 'Cli'}" required="true"/>
-				                <p:outputLabel value="Apellido:" rendered="#{PrincipalB.orgocli == 'Cli'}" />
-				                <p:inputText value="#{PrincipalB.ape}" rendered="#{PrincipalB.orgocli == 'Cli'}" required="true"/>
-				                <p:outputLabel value="DNI:" rendered="#{PrincipalB.orgocli == 'Cli'}" />
-				                <p:inputText value="#{PrincipalB.dni}" rendered="#{PrincipalB.orgocli == 'Cli'}" required="true"/>
-				                <p:outputLabel value="Razon social:" rendered="#{PrincipalB.orgocli == 'Org'}" />
-				                <p:inputText value="#{PrincipalB.raso}" rendered="#{PrincipalB.orgocli == 'Org'}" required="true"/>
-	        					<p:outputLabel value="CUIT:" />
-	               				<p:inputText value="#{PrincipalB.cuit}" />
-				                <p:outputLabel value="Direccion:" />
-				                <p:inputText value="#{PrincipalB.dir}"/>
-				                <p:outputLabel value="Telefono 1:" />
-	              				<p:inputText value="#{PrincipalB.tel1}"/>
-								<p:outputLabel value="Telefono 2:" />
-				                <p:inputText value="#{PrincipalB.tel2}"/>
-				                <p:outputLabel value="E-Mail:" />
-				                <p:inputText value="#{PrincipalB.eml}"/>				                				                
-				           </p:panelGrid>
-				          <p:commandButton value="Cliente" action="#{PrincipalB.}" onclick="PF('PDVCCliente').hide()"/>
-				          <p:commandButton value="Guardar" action="#{PrincipalB.SCli}" onclick="PF('PDVCCliente').hide()"/>
-				           </h:form>
-				     
-				           <p:commandButton value="Guardar" action="#{PrincipalB.SCli}" onclick="PF('PDVCCliente').hide()"/>           				
-           				
-		
-		
-
-    	
     	
 	</h:body>
 </html>

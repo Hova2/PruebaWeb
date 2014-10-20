@@ -10,6 +10,8 @@ import org.primefaces.event.FlowEvent;
 
 public class Principal implements Serializable{
 
+	//Variables para clientes u organizaciones
+	
 	private Long cuit;
 	private String dir;
 	private Integer tel1;
@@ -21,7 +23,19 @@ public class Principal implements Serializable{
 	private String raso;
 	private Integer idcli;
 	private Integer idorg;
-				
+	
+	// Variables para articulos
+	
+	private Integer idart;
+	private String nomart;
+	private String tipart;
+	private Integer cantart;
+	private String descart;
+	private Integer palqart;
+	private Integer pcomart;
+	
+	//Metodos geter y seter para cientes u organizaciones
+	
 	public  Long getCuit(){
 		return this.cuit;
 	}
@@ -108,6 +122,64 @@ public class Principal implements Serializable{
 	
 	public void setRaso(String raso){
 		this.raso = raso;
+	}
+	
+	//Metodos geter y seter para articulos
+	
+	public Integer getIdart(){
+		return this.idart;
+	}
+	
+	public void setIdart(Integer idart){
+		this.idart = idart;
+	}
+	
+	public String getNomart(){
+		return this.nomart;
+	}
+	
+	public void setNomart(String nomart){
+		this.nomart = nomart;
+	}
+	
+	public String getTipart(){
+		return this.tipart;
+	}
+	
+	public void setTipart(String tipart){
+		this.tipart = tipart;
+	}
+	
+	public Integer getCantart(){
+		return this.cantart;
+	}
+	
+	public void setCantart(Integer cantart){
+		this.cantart = cantart;
+	}
+	
+	public String getDescart(){
+		return this.descart;
+	}
+	
+	public void setDescart(String descart){
+		this.descart = descart;
+	} 
+	
+	public Integer getPalqart(){
+		return this.palqart;
+	}
+	
+	public void setPalqart(Integer palqart){
+		this.palqart = palqart;
+	}
+	
+	public Integer getPcomart(){
+		return this.pcomart;
+	}
+	
+	public void setPcomart(Integer pcomart){
+		this.pcomart = pcomart;
 	}
 	
 	public void ResetValues(){
