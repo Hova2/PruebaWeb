@@ -26,7 +26,6 @@ public class Principal implements Serializable{
 	
 	// Variables para articulos
 	
-	private Integer idart;
 	private String nomart;
 	private String tipart;
 	private Integer cantart;
@@ -126,13 +125,6 @@ public class Principal implements Serializable{
 	
 	//Metodos geter y seter para articulos
 	
-	public Integer getIdart(){
-		return this.idart;
-	}
-	
-	public void setIdart(Integer idart){
-		this.idart = idart;
-	}
 	
 	public String getNomart(){
 		return this.nomart;
@@ -194,6 +186,12 @@ public class Principal implements Serializable{
 		this.setTel2(null);
 		this.setEml(null);
 		this.setRaso(null);
+		this.setNomart(null);
+		this.setCantart(null);
+		
+		this.setTipart(null);
+		this.setPalqart(null);
+		this.setPcomart(null);
 	}
 	
 	public void CCli(){
@@ -239,7 +237,9 @@ public class Principal implements Serializable{
 			sabierta.getTransaction().commit();
 			this.ResetValues();
 		}
-		}
+		sabierta.close();
+		sesion.close();
+	}
 	
 	public void COrg(){
 		SessionFactory sesion = CreaSesion.getSessionFactory();
@@ -282,12 +282,14 @@ public class Principal implements Serializable{
 			sabierta.getTransaction().commit();
 			this.ResetValues();
 		}
+		sabierta.close();
+		sesion.close();
 	}
 	
 	public List LCli(){
 		SessionFactory Sesion = CreaSesion.getSessionFactory();
 		Session SAbierta = Sesion.openSession();
-		return SAbierta.createQuery("FROM Cliente").list();
+		return SAbierta.createQuery("FROM Cliente").list(); 		
 	}
 	
 	public List LOrg(){
@@ -297,10 +299,10 @@ public class Principal implements Serializable{
 	}
 	
 	public void BCli(){
-		SessionFactory Sesion = CreaSesion.getSessionFactory();
-		Session SAbierta = Sesion.openSession();
+		SessionFactory sesion = CreaSesion.getSessionFactory();
+		Session sabierta = sesion.openSession();
 		String query = ("from Cliente where idcli="+"'"+this.getIdcli().toString()+"'");
-		Cliente mcli = (Cliente)SAbierta.createQuery(query).uniqueResult();
+		Cliente mcli = (Cliente)sabierta.createQuery(query).uniqueResult();
 		this.setApe(mcli.getApe());
 		this.setNom(mcli.getNom());
 		this.setDni(mcli.getDni());
@@ -308,20 +310,24 @@ public class Principal implements Serializable{
 		this.setTel1(mcli.getClienteOrganizacion().getTel1());
 		this.setTel2(mcli.getClienteOrganizacion().getTel2());
 		this.setDir(mcli.getClienteOrganizacion().getDir());
-		this.setEml(mcli.getClienteOrganizacion().getEml());	
+		this.setEml(mcli.getClienteOrganizacion().getEml());
+		sabierta.close();
+		sesion.close();
 	}
 	
 	public void BOrg(){
-		SessionFactory Sesion = CreaSesion.getSessionFactory();
-		Session SAbierta = Sesion.openSession();
+		SessionFactory sesion = CreaSesion.getSessionFactory();
+		Session sabierta = sesion.openSession();
 		String query = ("from Organizacion where idorg="+"'"+this.getIdorg().toString()+"'");
-		Organizacion morg = (Organizacion)SAbierta.createQuery(query).uniqueResult();
+		Organizacion morg = (Organizacion)sabierta.createQuery(query).uniqueResult();
 		this.setRaso(morg.getRaso());
 		this.setCuit(morg.getClienteOrganizacion().getCuit());
 		this.setTel1(morg.getClienteOrganizacion().getTel1());
 		this.setTel2(morg.getClienteOrganizacion().getTel2());
 		this.setDir(morg.getClienteOrganizacion().getDir());
-		this.setEml(morg.getClienteOrganizacion().getEml());	
+		this.setEml(morg.getClienteOrganizacion().getEml());
+		sabierta.close();
+		sesion.close();
 	}
 	
 	public void ECli(){
@@ -348,6 +354,28 @@ public class Principal implements Serializable{
 			sabierta.delete(co);
 			sabierta.getTransaction().commit();
 			this.ResetValues();
-		}		
+		}
+		sabierta.close();
+		sesion.close();
 	}
+	
+	// Metodos para articulos
+	
+	public void CArt(){
+		SessionFactory sesion = CreaSesion.getSessionFactory();
+		Session sabierta = sesion.openSession();
+		Articulo art = new Articulo();
+		
+		art.setNom(this.getNomart());
+		art.setTip(this.getTipart());
+		art.setCant(this.getCantart());
+		art.setDesc(this.getDescart());
+		art.setPalq(this.getPalqart());
+		art.setPcom(this.getPcomart());
+		sabierta.beginTransaction();
+		sabierta.save(art);
+		sabierta.getTransaction().commit();
+		sabierta.close();
+		sesion.close();
+		}
 }

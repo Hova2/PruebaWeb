@@ -540,7 +540,50 @@
  			<p:ajax update="@this" resetValues="true"/>
  		</p:dialog>
  		<p:dialog id="DCArticulo" header="Cargar articulo" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="DWVCArticulo" modal="true" styleClass="sacarscroll">
- 			<p:ajax update="@this" resetValues="true"/>
+ 			<h:form id="FCArticulo">
+	 					<p:panelGrid id="PGCArticulo" columns="3" styleClass="sinborde sinbordetam">
+		        			<p:outputLabel value="(*) Nombre:" />
+					        <p:inputText id="ITNomart" value="#{PrincipalB.nomart}" required="true" requiredMessage="Ingrese un nombre" validatorMessage="Debe tener al menos 2 caracteres ">
+						        <f:validateLength minimum="2" />								
+					        </p:inputText>
+					        <p:message for="ITNomart" />
+					     		
+					     	<p:outputLabel value="(*) Tipo:" />
+					        <p:inputText id="ITTipart" value="#{PrincipalB.tipart}" required="true" requiredMessage="Ingrese un tipo" validatorMessage="Debe tener al menos 2 caracteres">
+					        	<f:validateLength minimum="2" />
+					        </p:inputText>
+					        <p:message for="ITTipart" />
+					        
+					        <p:outputLabel value="(*) Cantidad:" />
+					        <p:inputText id="ITCantart" value="#{PrincipalB.cantart}" required="true" requiredMessage="Ingrese la cantidad" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s" >
+								<f:validateLongRange minimum="1" />  			
+		        			</p:inputText>
+		        			<p:message for="ITCantart" />
+		        			
+		        			<p:outputLabel value="Descripcion:" />
+		               		<p:inputText id="ITDescart" value="#{PrincipalB.descart}" validatorMessage="Debe tener al menos 2 caracteres">
+		               			<f:validateLength minimum="2" />		        				
+		               		</p:inputText>
+					        <p:message for="ITDescart" />					        
+					 				        	        
+					        <p:outputLabel value="(*) Precio de alquiler:" />
+		              		<p:inputText id="ITPalqart" value="#{PrincipalB.palqart}" required="true" requiredMessage="Ingrese un precio de alquiler" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		        				<f:validateLongRange minimum="1" />
+		              		</p:inputText>
+							<p:message for="ITPalqart" />
+							
+							<p:outputLabel value="Precio de compra:" />
+					        <p:inputText id="ITPcomart" value="#{PrincipalB.pcomart}" validatorMessage="Debe tener al menos 2 N°s y ser positivo" converterMessage="Solo se permiten N°s">
+		        				<f:validateLongRange minimum="1" />
+					        </p:inputText>
+					        <p:message for="ITPcomart" />
+				        </p:panelGrid>
+				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
+				        <br/>
+				        <p:commandButton value="Guardar" action="#{PrincipalB.CArt}" update="FCArticulo"/>
+				        <p:commandButton value="Limpiar" resetValues="true" immediate="true" update="FCArticulo"/>				        
+ 					</h:form>
+ 					 			
  		</p:dialog>
  		<p:dialog id="DLArticulo" header="Listar articulo" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="DWVLArticulo" modal="true" styleClass="sacarscroll">
  			<p:ajax update="@this" resetValues="true"/>
