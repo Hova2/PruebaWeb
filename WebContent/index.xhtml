@@ -31,10 +31,10 @@
     				<p:graphicImage value="listar.jpg" width="50px" height="50px"/>
     				<p:graphicImage value="modificar.jpg" width="40px" height="40px"/>
     				<p:graphicImage value="delete.jpg" width="40px" height="40px"/>
-    				<p:commandButton id="BCArticulo" type="button" value="Cargar articulos" onclick="PF('DWVCArticulo').show()" />
-    				<p:commandButton id="BLArticulo" type="button" value="Listar articulos" onclick="PF('DWVLArticulo').show()" />
-    				<p:commandButton id="BMArticulo" type="button" value="Modificar articulos" onclick="PF('DWVMArticulo').show()" />
-    				<p:commandButton id="BEArticulo" type="button" value="Eliminar articulos" onclick="PF('DWVEArticulo').show()" />    				
+    				<p:commandButton id="CBCArt" type="button" value="Cargar articulos" onclick="PF('DWVCArt').show()" />
+    				<p:commandButton id="CBLArt" type="button" value="Listar articulos" onclick="PF('DWVLArt').show()" />
+    				<p:commandButton id="CBMArt" type="button" value="Modificar articulos" onclick="PF('DWVMArt').show()" />
+    				<p:commandButton id="CBEArt" type="button" value="Eliminar articulos" onclick="PF('DWVEArt').show()" />    				
    				 </p:panelGrid>
 	   		</p:tab>
 	        <p:tab title="Pedidos">
@@ -231,7 +231,7 @@
 		            	</h:commandLink>
 		            	<h:commandLink>
 		                	<p:graphicImage value="pdf.png" width="40px" height="40px" />
-		                	<p:dataExporter type="pdf" target="DTLClis" fileName="Listado de clientes"/>
+		                	<p:dataExporter type="pdf" target="DTLClis" fileName="Listado de clientes" preProcessor="#{PrincipalB.PreProPDF}"/>
 		                </h:commandLink>
 		    		</h:form>
 		    	</p:tab>
@@ -287,7 +287,7 @@
 			            </h:commandLink>
 			            <h:commandLink>
 			               	<p:graphicImage value="pdf.png" width="40px" height="40px" />
-			               	<p:dataExporter type="pdf" target="DTLOrgs" fileName="Listado de clientes"/>
+			               	<p:dataExporter type="pdf" target="DTLOrgs" fileName="Listado de clientes" preProcessor="#{PrincipalB.PreProPDF}"/>
 			            </h:commandLink>
 		    		</h:form>		
 		    	</p:tab>
@@ -539,8 +539,8 @@
  			</p:tabView>
  			<p:ajax update="@this" resetValues="true"/>
  		</p:dialog>
- 		<p:dialog id="DCArticulo" header="Cargar articulo" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="DWVCArticulo" modal="true" styleClass="sacarscroll">
- 			<h:form id="FCArticulo">
+ 		<p:dialog id="DCArt" header="Cargar articulo" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="DWVCArt" modal="true" styleClass="sacarscroll">
+ 			<h:form id="FCArt">
 	 					<p:panelGrid id="PGCArticulo" columns="3" styleClass="sinborde sinbordetam">
 		        			<p:outputLabel value="(*) Nombre:" />
 					        <p:inputText id="ITNomart" value="#{PrincipalB.nomart}" required="true" requiredMessage="Ingrese un nombre" validatorMessage="Debe tener al menos 2 caracteres ">
@@ -580,13 +580,65 @@
 				        </p:panelGrid>
 				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
 				        <br/>
-				        <p:commandButton value="Guardar" actionListener="#{PrincipalB.CArt}" update="FCArticulo"/>
-				        <p:commandButton value="Limpiar" resetValues="true" immediate="true" update="FCArticulo"/>				        
- 					</h:form>
- 					 			
+				        <p:commandButton value="Guardar" actionListener="#{PrincipalB.CArt}" update="FCArt :FLArt"/>
+				        <p:commandButton value="Limpiar" resetValues="true" immediate="true" update="FCArt"/>				        
+ 					</h:form> 					 			
  		</p:dialog>
- 		<p:dialog id="DLArticulo" header="Listar articulo" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="DWVLArticulo" modal="true" styleClass="sacarscroll">
- 			<p:ajax update="@this" resetValues="true"/>
+ 		<p:dialog id="DLArt" header="Listar articulo" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="DWVLArt" modal="true" styleClass="sacarscroll">
+ 			<h:form id="FLArt">
+ 				<p:dataTable id="DTLArt" var="Arts" value="#{PrincipalB.LArt()}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="15" style="margin-bottom:20px">	    		   
+ 	   				<p:column>
+						<f:facet name="header">
+							<h:outputText value="N° de Articulo" />
+						</f:facet>
+						<h:outputText value="#{Arts.idart}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nombre" />
+						</f:facet>
+						<h:outputText value="#{Arts.nom}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Tipo" />
+						</f:facet>
+						<h:outputText value="#{Arts.tip}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Cantidad" />
+						</f:facet>
+						<h:outputText value="#{Arts.cant}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Descripcion" />
+						</f:facet>
+						<h:outputText value="#{Arts.desc}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Precio de alquiler" />
+						</f:facet>
+						<h:outputText value="#{Arts.palq}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Precio de compra" />
+						</f:facet>
+						<h:outputText value="#{Arts.pcom}" />
+					</p:column>
+				</p:dataTable>		    			
+				<h:commandLink>
+					<p:graphicImage value="xls.png" width="40px" height="40px" />
+					<p:dataExporter type="xls" target="DTLArt" fileName="Listado de articulos" />
+				</h:commandLink>
+				<h:commandLink>
+					<p:graphicImage value="pdf.png" width="40px" height="40px" />
+					<p:dataExporter type="pdf" target="DTLArt" fileName="Listado de articulos" preProcessor="#{PrincipalB.PreProPDF}"/>
+				</h:commandLink>
+			</h:form>
  		</p:dialog>
  		<p:dialog id="DMArticulo" header="Modificar articulo" showEffect="explode" resizable="false" draggable="false" hideEffect="explode" widgetVar="DWVMArticulo" modal="true" styleClass="sacarscroll">
  			<p:ajax update="@this" resetValues="true"/>

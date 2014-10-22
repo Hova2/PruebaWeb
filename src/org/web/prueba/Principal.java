@@ -1,5 +1,6 @@
 package org.web.prueba;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,6 +8,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.PageSize;
 
 public class Principal implements Serializable{
 
@@ -381,4 +386,20 @@ public class Principal implements Serializable{
 		sesion.close();
 		this.ResetValuseArt();
 		}
+	
+	public List LArt(){
+		SessionFactory sesion = CreaSesion.getSessionFactory();
+		Session sabierta = sesion.openSession();
+		List query = sabierta.createQuery("FROM Articulo").list();
+		sabierta.close();
+		sesion.close();
+		return query;				
+	}
+	
+	// Formato para el PDF que se exporta
+	
+	public void PreProPDF(Object document) throws IOException, DocumentException {
+		Document pdf = (Document) document;
+		pdf.setPageSize(PageSize.A4.rotate());	     
+	}
 }
