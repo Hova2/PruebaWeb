@@ -22,8 +22,8 @@ public class Articulo implements java.io.Serializable {
 	public Articulo() {
 	}
 
-	public Articulo(String nom, String tip, int cant, String desc, int palq,
-			int pcom) {
+	public Articulo(String nom, String tip, Integer cant, String desc, Integer palq,
+			Integer pcom) {
 		this.nom = nom;
 		this.tip = tip;
 		this.cant = cant;
@@ -32,8 +32,8 @@ public class Articulo implements java.io.Serializable {
 		this.pcom = pcom;
 	}
 
-	public Articulo(String nom, String tip, int cant, String desc, int palq,
-			int pcom, Set pedidoArticulos) {
+	public Articulo(String nom, String tip, Integer cant, String desc, Integer palq,
+			Integer pcom, Set pedidoArticulos) {
 		this.nom = nom;
 		this.tip = tip;
 		this.cant = cant;
@@ -67,11 +67,11 @@ public class Articulo implements java.io.Serializable {
 		this.tip = tip;
 	}
 
-	public int getCant() {
+	public Integer getCant() {
 		return this.cant;
 	}
 
-	public void setCant(int cant) {
+	public void setCant(Integer cant) {
 		this.cant = cant;
 	}
 
@@ -83,19 +83,19 @@ public class Articulo implements java.io.Serializable {
 		this.desc = desc;
 	}
 
-	public int getPalq() {
+	public Integer getPalq() {
 		return this.palq;
 	}
 
-	public void setPalq(int palq) {
+	public void setPalq(Integer palq) {
 		this.palq = palq;
 	}
 
-	public int getPcom() {
+	public Integer getPcom() {
 		return this.pcom;
 	}
 
-	public void setPcom(int pcom) {
+	public void setPcom(Integer pcom) {
 		this.pcom = pcom;
 	}
 

@@ -9,17 +9,17 @@
             <generator class="identity" />
         </id>
         <property name="nom" type="string">
-            <column name="Anom" length="50" not-null="true">
+            <column name="Anom" length="50">
                 <comment>Es el nombre del articulo.</comment>
             </column>
         </property>
         <property name="tip" type="string">
-            <column name="Atip" length="50" not-null="true">
+            <column name="Atip" length="50">
                 <comment>Es el tipo de articulo.</comment>
             </column>
         </property>
         <property name="cant" type="java.lang.Integer">
-            <column name="Acant" not-null="true">
+            <column name="Acant" >
                 <comment>Es la cantidad que tiene el articulo en stock.</comment>
             </column>
         </property>
@@ -29,7 +29,7 @@
             </column>
         </property>
         <property name="palq" type="java.lang.Integer">
-            <column name="Apalq" not-null="true">
+            <column name="Apalq" >
                 <comment>Es el precio de alquiler del articulo.</comment>
             </column>
         </property>

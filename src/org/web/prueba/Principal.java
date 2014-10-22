@@ -31,6 +31,7 @@ public class Principal implements Serializable{
 	
 	// Variables para articulos
 	
+	private Integer idart;
 	private String nomart;
 	private String tipart;
 	private Integer cantart;
@@ -130,6 +131,13 @@ public class Principal implements Serializable{
 	
 	//Metodos geter y seter para articulos
 	
+	public Integer getIdart(){
+		return this.idart;
+	}
+	
+	public void setIdart(Integer idart){
+		this.idart = idart;
+	}
 	
 	public String getNomart(){
 		return this.nomart;
@@ -194,6 +202,7 @@ public class Principal implements Serializable{
 	}
 	
 	public void ResetValuseArt(){
+		this.setIdart(null);
 		this.setNomart(null);
 		this.setTipart(null);
 		this.setCantart(null);
@@ -283,7 +292,7 @@ public class Principal implements Serializable{
 			org.setRaso(this.raso);
 			org.setClienteOrganizacion(co);
 			sabierta.beginTransaction();
-			sabierta.update(co);;
+			sabierta.update(co);
 			sabierta.update(org);
 			sabierta.getTransaction().commit();
 			this.ResetValues();
@@ -381,11 +390,11 @@ public class Principal implements Serializable{
 		art.setPcom(this.getPcomart());
 		sabierta.beginTransaction();
 		sabierta.save(art);
-		sabierta.getTransaction().commit();
+		sabierta.getTransaction().commit();						
 		sabierta.close();
 		sesion.close();
 		this.ResetValuseArt();
-		}
+	}
 	
 	public List LArt(){
 		SessionFactory sesion = CreaSesion.getSessionFactory();
@@ -394,6 +403,55 @@ public class Principal implements Serializable{
 		sabierta.close();
 		sesion.close();
 		return query;				
+	}
+	
+	public void BArt(){
+		SessionFactory sesion = CreaSesion.getSessionFactory();
+		Session sabierta = sesion.openSession();
+		String query = ("from Articulo where idart="+"'"+this.getIdart().toString()+"'");
+		Articulo art = (Articulo)sabierta.createQuery(query).uniqueResult();
+		this.setNomart(art.getNom());
+		this.setTipart(art.getTip());
+		this.setCantart(art.getCant());
+		this.setDescart(art.getDesc());
+		this.setPalqart(art.getPalq());
+		this.setPcomart(art.getPcom());
+		sabierta.close();
+		sesion.close();
+	}
+	
+	public void MArt(){
+		SessionFactory sesion = CreaSesion.getSessionFactory();
+		Session sabierta = sesion.openSession();
+		Articulo art = new Articulo();
+		
+		art.setIdart(this.getIdart());
+		art.setNom(this.getNomart());
+		art.setTip(this.getTipart());
+		art.setCant(this.getCantart());
+		art.setDesc(this.getDescart());
+		art.setPalq(this.getPalqart());
+		art.setPcom(this.getPcomart());
+		sabierta.beginTransaction();
+		sabierta.update(art);
+		sabierta.getTransaction().commit();
+		sabierta.close();
+		sesion.close();
+		this.ResetValuseArt();
+	}
+	
+	public void EArt(){
+		SessionFactory sesion = CreaSesion.getSessionFactory();
+		Session sabierta = sesion.openSession();
+		Articulo art = new Articulo();
+		
+		art.setIdart(this.idart);
+		sabierta.beginTransaction();
+		sabierta.delete(art);
+		sabierta.getTransaction().commit();
+		sabierta.close();
+		sesion.close();
+		this.ResetValuseArt();
 	}
 	
 	// Formato para el PDF que se exporta
