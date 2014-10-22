@@ -13,10 +13,10 @@ public class Articulo implements java.io.Serializable {
 	private Integer idart;
 	private String nom;
 	private String tip;
-	private int cant;
+	private Integer cant;
 	private String desc;
-	private int palq;
-	private int pcom;
+	private Integer palq;
+	private Integer pcom;
 	private Set pedidoArticulos = new HashSet(0);
 
 	public Articulo() {

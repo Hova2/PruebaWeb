@@ -580,7 +580,7 @@
 				        </p:panelGrid>
 				        <p:outputLabel value="Todos los campos con (*) son obligatorios" />
 				        <br/>
-				        <p:commandButton value="Guardar" action="#{PrincipalB.CArt}" update="FCArticulo"/>
+				        <p:commandButton value="Guardar" actionListener="#{PrincipalB.CArt}" update="FCArticulo"/>
 				        <p:commandButton value="Limpiar" resetValues="true" immediate="true" update="FCArticulo"/>				        
  					</h:form>
  					 			

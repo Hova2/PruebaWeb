@@ -9,38 +9,38 @@
             <generator class="identity" />
         </id>
         <property name="nom" type="string">
-            <column name="Nom" length="50">
+            <column name="Anom" length="50" not-null="true">
                 <comment>Es el nombre del articulo.</comment>
             </column>
         </property>
         <property name="tip" type="string">
-            <column name="Tip" length="50">
+            <column name="Atip" length="50" not-null="true">
                 <comment>Es el tipo de articulo.</comment>
             </column>
         </property>
-        <property name="cant" type="int">
-            <column name="Cant">
+        <property name="cant" type="java.lang.Integer">
+            <column name="Acant" not-null="true">
                 <comment>Es la cantidad que tiene el articulo en stock.</comment>
             </column>
         </property>
         <property name="desc" type="string">
-            <column name="Desc" length="50">
+            <column name="Adesc" length="65535">
                 <comment>Es la descripci&#195;&#179;n del articulo.</comment>
             </column>
         </property>
-        <property name="palq" type="int">
-            <column name="Palq">
+        <property name="palq" type="java.lang.Integer">
+            <column name="Apalq" not-null="true">
                 <comment>Es el precio de alquiler del articulo.</comment>
             </column>
         </property>
-        <property name="pcom" type="int">
-            <column name="Pcom">
+        <property name="pcom" type="java.lang.Integer">
+            <column name="Apcom">
                 <comment>Es el precio en el cual se compro el articulo.</comment>
             </column>
         </property>
         <set name="pedidoArticulos" table="PedidoArticulo" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="IDArt" not-null="false">
+                <column name="IDArt" not-null="true">
                     <comment>Es el identificador de art&#195;&#173;culos.Es un indice</comment>
                 </column>
             </key>

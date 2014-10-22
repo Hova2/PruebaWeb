@@ -185,11 +185,14 @@ public class Principal implements Serializable{
 		this.setTel1(null);
 		this.setTel2(null);
 		this.setEml(null);
-		this.setRaso(null);
+		this.setRaso(null);		
+	}
+	
+	public void ResetValuseArt(){
 		this.setNomart(null);
-		this.setCantart(null);
-		
 		this.setTipart(null);
+		this.setCantart(null);
+		this.setDescart(null);
 		this.setPalqart(null);
 		this.setPcomart(null);
 	}
@@ -260,9 +263,7 @@ public class Principal implements Serializable{
 			sabierta.save(co);
 			org.setIdorg(co.getIdcliOrg());
 			sabierta.save(org);
-			sabierta.getTransaction().commit();
-			sabierta.close();
-			sesion.close();
+			sabierta.getTransaction().commit();			
 			this.ResetValues();
 		}
 		else{
@@ -284,6 +285,7 @@ public class Principal implements Serializable{
 		}
 		sabierta.close();
 		sesion.close();
+		
 	}
 	
 	public List LCli(){
@@ -377,5 +379,6 @@ public class Principal implements Serializable{
 		sabierta.getTransaction().commit();
 		sabierta.close();
 		sesion.close();
+		this.ResetValuseArt();
 		}
 }
